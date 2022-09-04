@@ -1,0 +1,92 @@
+input.TodoList {
+   width: 111px;
+   text-align: center;
+}
+
+fieldset.TodoList {
+   width: auto;
+}
+
+li label {
+   text-align: left;
+}
+
+ul.TodoList {
+   margin-left: 0;
+   padding-left: 0;
+}
+
+li.TodoList {
+   display: grid;
+   grid-template-columns: 1fr auto auto;   
+}
+
+/* li:hover {
+   background-color: dimgrey;
+} */
+
+/* li span.TodoList:hover {
+   cursor: pointer;
+   color: steelblue
+} */
+
+li span.TodoList  {
+   font-weight: bolder;
+   font-size: 1.5rem;
+   padding: 0 7px;
+}
+
+button.TodoList {
+   font-size: small;
+   padding-top: 10px;
+}
+
+h1.TodoList {
+   margin-bottom: 0;
+   font-size: 2.5rem;
+}
+
+i.done { 
+   color:greenyellow;
+   font-weight: bolder;
+}
+
+li i.del:hover {
+   color:red !important;
+}
+
+input.TodoList {
+   height: 25px;
+   margin-bottom: -2px;
+}
+
+legend.TodoList {
+   font-size: 1.4rem;
+}
+
+li span :hover {
+   cursor: pointer;
+   background: #555;
+   width: 28px;
+   height: 28px;
+   border-radius: 100%;
+   display: inline-block;
+   text-align: center;
+   margin: -8px -8px;
+   padding-top: 4px;
+   /* margin:5px; */
+   overflow:hidden;
+   /* padding:5px; */
+   position:relative;
+}
+
+i.item {
+ transform:translate(-50%,-50%);
+ position:absolute;
+ top:50%;
+ left:50%;
+}
+
+.error {
+   color: red;
+}

@@ -1,0 +1,17 @@
+button.Counter {
+   font-family: 'Cascadia Code';
+   font-size: 2rem;
+   font-weight: bolder;
+   padding: 0px 9px;
+}
+
+button.Counter:hover {
+   color: white;
+   background-color: dimgray;
+   border-color: dimgray;
+   outline: none;
+}
+
+button.Counter:focus {
+   outline: none;
+}

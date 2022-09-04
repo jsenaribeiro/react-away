@@ -1,0 +1,17 @@
+{
+   "plugins": ["plugins/markdown"],
+   "source": {
+      "include": ["out"],
+      "includePattern": ".js$",
+      "excludePattern": "(node_modules|src|doc|lib|res)"
+   },
+   "templates": {
+      "cleverLinks": true,
+      "monospaceLinks": true
+   },
+   "opts": {                      
+      "recurse": true,
+      "readme": "./doc/reference.md",
+      "destination": "./doc/reference"
+   }
+}

@@ -1,0 +1,1 @@
+json-server -w ./src/db.json -d 500 --id code

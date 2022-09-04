@@ -1,0 +1,13 @@
+form.Form * {
+   display: block;
+   margin-top: 5px;
+}
+
+form.Form section {
+   display: grid;
+   grid-template-columns: 1fr auto;
+}
+
+form.Form section label {
+   text-align: left;
+}

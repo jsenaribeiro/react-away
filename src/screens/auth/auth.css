@@ -1,0 +1,14 @@
+fieldset.Auth legend {
+   padding: 10px 5px;
+   font-size: 1.8rem;
+}
+
+fieldset.Auth label {
+   padding-right: 10px;
+}
+
+pre.Auth {
+   text-align: left;
+   padding: 10px 20px;
+   background-color: black;
+}
