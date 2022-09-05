@@ -32,3 +32,17 @@ export function useStore<T=any, U=any>(select: (store: T) => U) {
       }
    })
 }
+
+/**
+ * Instantiate in modular scope self-rendering object
+ */
+export function useState<T extends record | record>(state: T): T {
+   return new Proxy(state, {
+      get(refer, field) { return refer[field] },
+      set(refer, field, value) {
+         (refer as record)[field] = value
+         context.render()
+         return true
+      }
+   }) as any as T
+}
