@@ -4,6 +4,17 @@
 
 <hr />
 
+## Life-cycle synonyms
+
+Simple synonyms for easy life-cyle handling.
+
+| Methods              | Label     | Description                          |
+| -------------------- | --------- | ------------------------------------ |
+| componentDidMount    | ```"mounted"``` | After React appends a node in DOM     |
+| componentDidUpdate   | ```"updated"``` | After React updates values in DOM     |
+| componentWillUnmount | ```"unmount"``` | After React removes a node from DOM |
+| componentDidCatch    | ```"catched"``` | After React thrown an exception       |
+
 ## useEffect replacer
 
 The listener replaces useEffect as a life-cycle handler.
@@ -76,14 +87,3 @@ listener.subscribers.filter(x => x.eventTag == "click").cancel()
 // cancel a specific subscribed callback 
 listener.subscribers.filter(x => x.callback == callback).cancel()
 ````
-
-## Life-cycle synonyms
-
-Simple synonyms for easy life-cyle handling.
-
-| Methods              | Label     | Description                          |
-| -------------------- | --------- | ------------------------------------ |
-| componentDidMount    | ```"mounted"``` | After React appends a node in DOM     |
-| componentDidUpdate   | ```"updated"``` | After React updates values in DOM     |
-| componentWillUnmount | ```"unmount"``` | After React removes a node from DOM |
-| componentDidCatch    | ```"catched"``` | After React thrown an exception       |

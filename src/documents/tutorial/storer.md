@@ -20,6 +20,8 @@ React Away replaces React with its ReactDOM (avoid providers).
 ````tsx
 import ReactDOM from 'react-away'
 
+class Store { public hello:string = "World" }
+
 ReactDOM.createRoot(true, "#root", <App />, Store)
 ````
 
@@ -55,10 +57,8 @@ React Away define a local state using the second arguments in a functional compo
 ````tsx
 const Hello = (props: any, state: any) = <>
    <h1>{ state.hello || "World" }</h1>
-   <input value={state.hello} onInput={onInput(state)} /> 
+   <input value={state.who} onInput={e => state.who = e.target.value}/>
 </>
-
-const onInput = (s: any) => (e: any) => s.hello = e.target.value
 ````
 
 ## Multiple stores
@@ -66,6 +66,8 @@ const onInput = (s: any) => (e: any) => s.hello = e.target.value
 The useStore offes multiple stores exposing inside store object.
 
 ```tsx
+import { useStore } from 'react-away'
+
 useStore<Store>(s => s.profile.user)
 useStore<Store>(s => s.todo)
 

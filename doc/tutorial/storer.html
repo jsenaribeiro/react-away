@@ -57,6 +57,8 @@ ReactDOM.createRoot(<span class="hljs-built_in">document</span>.getElementById(<
 <p>React Away replaces React with its ReactDOM (avoid providers).</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
 
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Store</span> </span>{ public hello:string = <span class="hljs-string">&quot;World&quot;</span> }
+
 ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, Store)
 </div></code></pre>
 <p>React Away has a easier API with extra features.</p>
@@ -81,14 +83,14 @@ ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-st
 <p>React Away define a local state using the second arguments in a functional component, as bellow (all fields are started undefined).</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> Hello = (props: any, <span class="hljs-attr">state</span>: any) = <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{ state.hello || &quot;World&quot; }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{state.hello}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{onInput(state)}</span> /&gt;</span> 
+   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{state.who}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{e</span> =&gt;</span> state.who = e.target.value}/&gt;
 <span class="hljs-tag">&lt;/&gt;</span></span>
-
-<span class="hljs-keyword">const</span> onInput = <span class="hljs-function">(<span class="hljs-params">s: any</span>) =&gt;</span> <span class="hljs-function">(<span class="hljs-params">e: any</span>) =&gt;</span> s.hello = e.target.value
 </div></code></pre>
 <h2 id="multiple-stores">Multiple stores</h2>
 <p>The useStore offes multiple stores exposing inside store object.</p>
-<pre><code class="language-tsx"><div>useStore&lt;Store&gt;(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.profile.user)
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { useStore } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+useStore&lt;Store&gt;(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.profile.user)
 useStore&lt;Store&gt;(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.todo)
 
 declare <span class="hljs-keyword">const</span> user: any

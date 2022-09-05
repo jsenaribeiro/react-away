@@ -21,11 +21,26 @@ export interface I18N {
 
 Create your locales as just objects (no JSON parsing cost and type-check enable with TypeScript).
 
-```ts
-export interface Locale { title: string, hello: string }   // in locale.ts
-export default { hello: "alô mundo", title: "meu título" } // in pt-br.ts
-export default { hello: "hello world", title: "my title" } // in en-us.ts
-```
+
+````ts
+export interface Locale { welcome: string }   
+
+````
+
+````ts
+import { Locale } from './locale'
+
+const en: Locale = {
+   language: "en",
+   identity: "English",
+   currency: (value) => `$ ${value.toFixed(2)}`,
+   datetime: (value) => value.toISOString(),
+   welcome: "Welcome"
+}
+
+export default en
+
+````
 
 ## Functional parametrization
 

@@ -8,7 +8,7 @@ import { useLanguage  } from '../lib'
 import { Auth } from './screens/auth'
 import { Locale } from './locales'
 
-useLanguage("pt")
+//useLanguage("pt")
 
 declare const locale: Locale
 
@@ -18,11 +18,11 @@ export default (props: any) => <>
    <div>
       <button onRoute="/">Home</button>
       <button onRoute="/hello">Hello</button>
-      <button onRoute="/counter">Counter</button> 
+      {/* <button onRoute="/counter">Counter</button>  */}
       <button onRoute="/params/1">Params</button> 
       <button onRoute="/login">Login</button>
       <button onRoute="/todo">Todo</button>
-      <button onRoute="/form">Form</button>
+      {/* <button onRoute="/form">Form</button> */}
    </div>
 
    <section>

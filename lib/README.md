@@ -4,7 +4,7 @@
 
 ## Documentation
 
-For tutorial, usage explanagem and reference documentation, please, access React Away [documentation](https://jsenaribeiro.github.io/react-away/) web site or the presentation video of React Away [presentation](https://www.youtube.com/watch?v=waia_IutrQQ) in YouTube.
+For tutorial, usage explanagem and reference documentation, please, access React Away [documentation](https://jsenaribeiro.github.io/react-away/) web site or the presentation video of React Away [presentation](https://www.youtube.com/watch?v=9ugQcP9clMQ) in YouTube.
 
 ## Features
 

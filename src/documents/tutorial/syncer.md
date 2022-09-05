@@ -28,11 +28,11 @@ A syncher object offers a contextual state information.
 ````tsx
 import { todoApi } from './todoApi'
 
-syncher.exception  // current error message and validations
-syncher.isSuccess  // self-rendering success flag for savings
-syncher.isLoading  // self-rendering current loading state
-syncher.outOfSync  // flag for out of sync remote states
-syncher.canceller  // request cancellation function
+todoApi.exception  // current error message and validations
+todoApi.isSuccess  // self-rendering success flag for savings
+todoApi.isLoading  // self-rendering current loading state
+todoApi.outOfSync  // flag for out of sync remote states
+todoApi.canceller  // request cancellation function
 ````
 
 ## Save/load example
@@ -58,10 +58,9 @@ const Hello = (props: any) => <>
 The syncher object expose a self-rendering loading flag.
 
 ````tsx
-import { syncher } from 'react-away'
-import { todoAsync } from './todo'
+import { todoApi } from './todoApi'
 
-const Todo = () => <progress hidden={!syncher.isLoading} />
+const Todo = () => <progress hidden={!todoApi.isLoading} />
 ````
 
 ## Settings
@@ -69,7 +68,7 @@ const Todo = () => <progress hidden={!syncher.isLoading} />
 It supports cancellation, timeout, poolin and cache.
 
 ````tsx
-import { synchronizer, syncher } from 'react-away'
+import { synchronizer } from 'react-away'
 
 export const todoAsync = synchronizer({
    timeout: 9000 // overall timeout for an request
@@ -77,8 +76,6 @@ export const todoAsync = synchronizer({
    pooling: 1000 // delay for request looping
    retries: 3    // retries after for an request
 })
-
-syncher.canceller.abort() // request cancellation
 ````
 
 ## Authentication
@@ -86,7 +83,7 @@ syncher.canceller.abort() // request cancellation
 JWT Bearer authentication integrated to synchornizers.
 
 ````tsx
-ReactDOM.createRoot(false, "#root", <App />, domain)
+ReactDOM.createRoot(false, "#root", <App />, Store)
    .authentication("GET", false, true)
       .login("http://localhost:4000/login")
       .token(s => s.access_token)

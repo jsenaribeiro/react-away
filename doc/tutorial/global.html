@@ -28,7 +28,8 @@
 }
 
 </style>
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
 <style>
@@ -58,9 +59,21 @@
 </div></code></pre>
 <h2 id="typed-oriented-locales">Typed-oriented locales</h2>
 <p>Create your locales as just objects (no JSON parsing cost and type-check enable with TypeScript).</p>
-<pre><code class="language-ts"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Locale { title: <span class="hljs-built_in">string</span>, <span class="hljs-attr">hello</span>: <span class="hljs-built_in">string</span> }   <span class="hljs-comment">// in locale.ts</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> { <span class="hljs-attr">hello</span>: <span class="hljs-string">&quot;alô mundo&quot;</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;meu título&quot;</span> } <span class="hljs-comment">// in pt-br.ts</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> { <span class="hljs-attr">hello</span>: <span class="hljs-string">&quot;hello world&quot;</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;my title&quot;</span> } <span class="hljs-comment">// in en-us.ts</span>
+<pre><code class="language-ts"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Locale { welcome: <span class="hljs-built_in">string</span> }   
+
+</div></code></pre>
+<pre><code class="language-ts"><div><span class="hljs-keyword">import</span> { Locale } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./locale&#x27;</span>
+
+<span class="hljs-keyword">const</span> en: Locale = {
+   <span class="hljs-attr">language</span>: <span class="hljs-string">&quot;en&quot;</span>,
+   <span class="hljs-attr">identity</span>: <span class="hljs-string">&quot;English&quot;</span>,
+   <span class="hljs-attr">currency</span>: <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> <span class="hljs-string">`$ <span class="hljs-subst">${value.toFixed(<span class="hljs-number">2</span>)}</span>`</span>,
+   <span class="hljs-attr">datetime</span>: <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> value.toISOString(),
+   <span class="hljs-attr">welcome</span>: <span class="hljs-string">&quot;Welcome&quot;</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> en
+
 </div></code></pre>
 <h2 id="functional-parametrization">Functional parametrization</h2>
 <p>Parametrized translation with simple functions</p>
@@ -96,7 +109,7 @@ useLanguage(<span class="hljs-string">&quot;pt&quot;</span>)
 </div></code></pre>
 <h2 id=""></h2>
 
-        
+        <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
         
     </body>
     </html>

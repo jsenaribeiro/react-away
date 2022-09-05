@@ -10,6 +10,7 @@ With npm installed, type the command bellow with npm (or yarn).
 Replace ReactDOM pelo ReactDOM as bellow.
 
 ```tsx
+class Store { public hello:string = "World" }
 ReactDOM.createRoot(true, "#root", <App />, Store)
 ```
 

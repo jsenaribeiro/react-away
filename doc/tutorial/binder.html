@@ -47,11 +47,10 @@
         <h1 id="react-away">React Away</h1>
 <h3 id="--i18n--storing--routing--fetching--binding--handling--directive--css"><a href="./index.html">#</a> | <a href="./global.html">i18n</a> | <a href="./storer.html">Storing</a> | <a href="./router.html">Routing</a> | <a href="./syncer.html">Fetching</a> | <strong>Binding</strong> | <a href="./broker.html">Handling</a> | <a href="./proper.html">Directive</a> | <a href="./styler.html">CSS</a></h3>
 <hr />
-<p>This is the stardard unidirectional way in read-write form elements.</p>
+## String Two-Way data binding
+<p>Two-way data binding with bind field path for store object.</p>
 <pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{store.hello.who}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{e</span> =&gt;</span> store.hello.who = e.target.value}/&gt;
 </div></code></pre>
-<h2 id="string-two-way-data-binding">String Two-Way data binding</h2>
-<p>Two-way data binding with bind field path for store object.</p>
 <pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">&quot;hello.who&quot;</span> /&gt;</span> 
 </div></code></pre>
 <h2 id="lambda-two-way-data-binding">Lambda Two-Way data binding</h2>
@@ -90,7 +89,7 @@
 </div></code></pre>
 <h2 id="oncommit-handler">onCommit handler</h2>
 <p>The onSubmit is replaced by onCommit replaces (WIP).</p>
-<pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleSubmit</span>(<span class="hljs-params">errors: Validation[]</span>) </span>{
+<pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onSubmit</span>(<span class="hljs-params">errors: Validation[]</span>) </span>{
    <span class="hljs-keyword">if</span> (errors.length &gt; <span class="hljs-number">0</span>) 
       <span class="hljs-comment">// handling errors</span>
    <span class="hljs-keyword">else</span> 

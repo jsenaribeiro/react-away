@@ -47,6 +47,39 @@
         <h1 id="react-away">React Away</h1>
 <h3 id="--i18n--storing--routing--fetching--binding--handling--directive--css"><a href="./index.html">#</a> | <a href="./global.html">i18n</a> | <a href="./storer.html">Storing</a> | <a href="./router.html">Routing</a> | <a href="./syncer.html">Fetching</a> | <a href="./binder.html">Binding</a> | <strong>Handling</strong> | <a href="./proper.html">Directive</a> | <a href="./styler.html">CSS</a></h3>
 <hr />
+<h2 id="life-cycle-synonyms">Life-cycle synonyms</h2>
+<p>Simple synonyms for easy life-cyle handling.</p>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Label</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>componentDidMount</td>
+<td><code>&quot;mounted&quot;</code></td>
+<td>After React appends a node in DOM</td>
+</tr>
+<tr>
+<td>componentDidUpdate</td>
+<td><code>&quot;updated&quot;</code></td>
+<td>After React updates values in DOM</td>
+</tr>
+<tr>
+<td>componentWillUnmount</td>
+<td><code>&quot;unmount&quot;</code></td>
+<td>After React removes a node from DOM</td>
+</tr>
+<tr>
+<td>componentDidCatch</td>
+<td><code>&quot;catched&quot;</code></td>
+<td>After React thrown an exception</td>
+</tr>
+</tbody>
+</table>
 <h2 id="useeffect-replacer">useEffect replacer</h2>
 <p>The listener replaces useEffect as a life-cycle handler.</p>
 <pre><code class="language-js"><div><span class="hljs-keyword">import</span> { listener } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
@@ -97,39 +130,6 @@ listener.subscribers.filter(<span class="hljs-function"><span class="hljs-params
 <span class="hljs-comment">// cancel a specific subscribed callback </span>
 listener.subscribers.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.callback == callback).cancel()
 </div></code></pre>
-<h2 id="life-cycle-synonyms">Life-cycle synonyms</h2>
-<p>Simple synonyms for easy life-cyle handling.</p>
-<table>
-<thead>
-<tr>
-<th>Methods</th>
-<th>Label</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>componentDidMount</td>
-<td><code>&quot;mounted&quot;</code></td>
-<td>After React appends a node in DOM</td>
-</tr>
-<tr>
-<td>componentDidUpdate</td>
-<td><code>&quot;updated&quot;</code></td>
-<td>After React updates values in DOM</td>
-</tr>
-<tr>
-<td>componentWillUnmount</td>
-<td><code>&quot;unmount&quot;</code></td>
-<td>After React removes a node from DOM</td>
-</tr>
-<tr>
-<td>componentDidCatch</td>
-<td><code>&quot;catched&quot;</code></td>
-<td>After React thrown an exception</td>
-</tr>
-</tbody>
-</table>
 
         
         

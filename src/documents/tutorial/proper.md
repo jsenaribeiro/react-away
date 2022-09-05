@@ -13,7 +13,7 @@ ReactDOM.createRoot(
    strict: boolean,        // define strict mode
    root: string,           // root query selector
    app: JSX.Element,       // App JSX Element
-   context: any,           // object story
+   store: Class,           // store Class
    directives: Directive[] // custom directives
 )
 ````

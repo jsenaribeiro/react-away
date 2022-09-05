@@ -11,7 +11,6 @@ The route and onRoute directives offers routing props.
 ```tsx
 const App => () => <>
    <Hello route="/hello" /> 
-
    <a onRoute="/">Home</a> 
    <a onRoute="/hello">Hello</a> 
 </>

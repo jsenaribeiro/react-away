@@ -49,4 +49,10 @@ Overall supported features
 * property routing
 
 ## License
-React Away is MIT licensed.
+React Away is MIT licensed.das
+
+````tsx
+   <input local bind="hello" />
+   <input value={state.hello} onInput={e => state.hello = e.target.value} />
+
+````

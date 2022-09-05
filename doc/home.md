@@ -2,6 +2,9 @@
 
 <br/>
 
+> YouTube [React EVO tutorial](https://www.youtube.com/watch?v=9ugQcP9clMQ)
+
+
 # Quick Start
 
 With npm installed, type the command bellow with npm (or yarn).

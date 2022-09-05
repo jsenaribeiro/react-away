@@ -3,17 +3,13 @@
 ### [#](./index.md) | [i18n](./global.md) | [Storing](./storer.html) | [Routing](./router.md) | [Fetching](./syncer.md) | **Binding** | [Handling](./broker.md) | [Directive](./proper.md) | [CSS](./styler.md)
 
 <hr />
-
-This is the stardard unidirectional way in read-write form elements.
-
-````html
-<input value={store.hello.who} onInput={e => store.hello.who = e.target.value}/>
-````
-
 ## String Two-Way data binding
 
 Two-way data binding with bind field path for store object.
 
+````html
+<input value={store.hello.who} onInput={e => store.hello.who = e.target.value}/>
+````
 ```html
 <input bind="hello.who" /> 
 ```
@@ -73,7 +69,7 @@ const ex = () => <input validate={custom} name="date" />
 The onSubmit is replaced by onCommit replaces (WIP).
 
 ````tsx
-function handleSubmit(errors: Validation[]) {
+function onSubmit(errors: Validation[]) {
    if (errors.length > 0) 
       // handling errors
    else 
