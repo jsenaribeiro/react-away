@@ -18,7 +18,7 @@ export type ProviderProps = {
 }
 
 /**
- * ReactEvo provider class
+ * React Away provider class
  */
 export class Provider extends React.Component<ProviderProps> {
    constructor(props: ProviderProps) {

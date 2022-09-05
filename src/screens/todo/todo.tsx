@@ -1,5 +1,5 @@
 import { useStore, listener } from "../../../lib"
-import { Store, Task, Todo } from "../../context"
+import { Store, Task, Todo } from "../../Store"
 import todoApi from './async'
 import { Loader } from "../../components/loader/loader"
 import { Locale } from "../../locales"

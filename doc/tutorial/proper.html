@@ -48,7 +48,7 @@
 <h3 id="--i18n--storing--routing--fetching--binding--handling--directive--css"><a href="./index.html">#</a> | <a href="./global.html">i18n</a> | <a href="./storer.html">Storing</a> | <a href="./router.html">Routing</a> | <a href="./syncer.html">Fetching</a> | <a href="./binder.html">Binding</a> | <a href="./broker.html">Handling</a> | <strong>Directive</strong> | <a href="./styler.html">CSS</a></h3>
 <hr />
 <h2 id="configuration">Configuration</h2>
-<p>As the App component, directives are registered ReactDOM createRoot.</p>
+<p>Directives are registered ReactDOM createRoot.</p>
 <pre><code class="language-tsx"><div>ReactDOM.createRoot(     
    strict: boolean,        <span class="hljs-comment">// define strict mode</span>
    <span class="hljs-attr">root</span>: string,           <span class="hljs-comment">// root query selector</span>
@@ -58,31 +58,25 @@
 )
 </div></code></pre>
 <h2 id="customization">Customization</h2>
-<p>Directive signature is simillar to functional components. Receiving and returning props;</p>
-<pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">props: CustomProps</span>): <span class="hljs-title">CustomProps</span>
+<p>Directive signature is a funciton that receives and returns props.</p>
+<pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">diretive</span>(<span class="hljs-params">props: any, args: DirectiveArgs</span>): <span class="hljs-title">any</span>
 </span></div></code></pre>
-<p>The tag enables select specific elements or components to apply the directive.</p>
-<pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">props: any, tag: string</span>) =&gt; <span class="hljs-title">tag</span> == &quot;<span class="hljs-title">input</span>&quot; ?  <span class="hljs-title">props</span> : (<span class="hljs-params">{...props}</span>)
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cssProps</span>(<span class="hljs-params">props: any</span>) =&gt; (<span class="hljs-params">{...props, className: props.css}</span>)
-</span></span></div></code></pre>
-<p>In TypeScript, it is required declaration for new attributes.</p>
+<p>The tag enables selective directive scope.</p>
+<pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">props: any, args: DirectiveArgs</span>) =&gt; 
+   <span class="hljs-title">args</span>.<span class="hljs-title">tag</span> !== &quot;<span class="hljs-title">input</span>&quot; ?  <span class="hljs-title">props</span> : /* <span class="hljs-title">changed</span> <span class="hljs-title">props</span> <span class="hljs-title">here</span> */
+</span></div></code></pre>
+<p>TypeScript requires a module declaration for the new attributes.</p>
 <pre><code class="language-tsx"><div>declare <span class="hljs-built_in">module</span> <span class="hljs-string">&#x27;react&#x27;</span> {
    <span class="hljs-keyword">export</span> interface HTMLAttributes&lt;T&gt; { 
       <span class="hljs-attr">myNewGlobalAttribute</span>: boolean 
    } 
 }
 </div></code></pre>
-<p>To apply yours directives, register it in ReactDOM.createRoot.</p>
-<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> cssPropsAsClassNameAlternative <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./propers/cssClassName&#x27;</span>
+<h2 id="registration">Registration</h2>
+<p>React Away createRoot is the register for directives.</p>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> myDirective <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./propers/cssClassName&#x27;</span>
 
-<span class="hljs-keyword">const</span> customDirectives = [cssPropsAsClassNameAlternative]
-
-ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span>/&gt;</span></span>, context, customDirectives)
-</div></code></pre>
-<pre><code class="language-css"><div><span class="hljs-selector-class">.red</span> { <span class="hljs-attribute">color</span>:red }
-</div></code></pre>
-<pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> App = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">css</span>=<span class="hljs-string">&#x27;red&#x27;</span>&gt;</span>I&#x27;m red<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
+ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span>/&gt;</span></span>, context, [myDirective])
 </div></code></pre>
 
         

@@ -6,7 +6,7 @@ tutorial
 doc site (mark -> web)
 
 
-evo
+away
 	proxys: rendering state
 	synchers: restful abstraction
 	directives: property-injection

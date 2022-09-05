@@ -47,12 +47,12 @@ li:hover:not(.selected) {
 
 img {
    max-width: 90px;
-   max-height: 30px;
+   max-height: 40px;
 }
 
 body > section {
    display: grid;
-   grid-template-columns: 30px 1fr;
+   grid-template-columns: 43px 1fr;
    border-bottom: solid 1px grey;
    background-color: #262626;
    margin-bottom: 20px;

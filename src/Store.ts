@@ -11,7 +11,7 @@ export interface Todo {
    list: Task[]
 }
 
-export class Store {   
+export default class Store {   
    app: string = "React Away"
    hello: string = "World"
    counter: number = 0
@@ -30,5 +30,3 @@ export class Store {
       list: []
    }
 }
-
-export default new Store()

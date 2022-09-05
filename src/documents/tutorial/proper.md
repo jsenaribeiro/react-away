@@ -6,7 +6,7 @@
 
 ## Configuration
 
-As the App component, directives are registered ReactDOM createRoot.
+Directives are registered ReactDOM createRoot.
 
 ````tsx
 ReactDOM.createRoot(     
@@ -20,21 +20,20 @@ ReactDOM.createRoot(
 
 ## Customization
 
-Directive signature is simillar to functional components. Receiving and returning props;
+Directive signature is a funciton that receives and returns props.
 
 ````tsx
-function (props: CustomProps): CustomProps
+function diretive(props: any, args: DirectiveArgs): any
 ````
 
-The tag enables select specific elements or components to apply the directive.
+The tag enables selective directive scope.
 
 ````tsx
-function(props: any, tag: string) => tag == "input" ?  props : ({...props})
-
-function cssProps(props: any) => ({...props, className: props.css})
+function(props: any, args: DirectiveArgs) => 
+   args.tag !== "input" ?  props : /* changed props here */
 ````
 
-In TypeScript, it is required declaration for new attributes.
+TypeScript requires a module declaration for the new attributes.
 
 ````tsx
 declare module 'react' {
@@ -44,20 +43,12 @@ declare module 'react' {
 }
 ````
 
-To apply yours directives, register it in ReactDOM.createRoot.
+## Registration
+
+React Away createRoot is the register for directives.
 
 ````tsx
-import cssPropsAsClassNameAlternative from './propers/cssClassName'
+import myDirective from './propers/cssClassName'
 
-const customDirectives = [cssPropsAsClassNameAlternative]
-
-ReactDOM.createRoot(true, "#root", <App/>, context, customDirectives)
-````
-
-````css
-.red { color:red }
-````
-
-````tsx
-const App = () => <h1 css='red'>I'm red</h1>
+ReactDOM.createRoot(true, "#root", <App/>, context, [myDirective])
 ````

@@ -15,11 +15,10 @@ declare const locale: Locale
 export default (props: any) => <>
    <h1>React Away</h1>
    <hr />
-
    <div>
       <button onRoute="/">Home</button>
-      <button onRoute="/counter">Counter</button> 
       <button onRoute="/hello">Hello</button>
+      <button onRoute="/counter">Counter</button> 
       <button onRoute="/params/1">Params</button> 
       <button onRoute="/login">Login</button>
       <button onRoute="/todo">Todo</button>

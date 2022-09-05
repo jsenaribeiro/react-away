@@ -4,12 +4,16 @@
 
 <hr />
 
-## [Agile state management](preview/storer.md)
+## [Agile state management](storer.html)
 
 ReactDOM settings just replaces ReactDOM.
 
 ````tsx
-ReactDOM.createRoot(true, "#root", <App />, { hello: "world" }) 
+import ReactDOM from 'react-away'
+
+export class Store { hello: "world" }
+
+ReactDOM.createRoot(true, "#root", <App />, Store) 
 ````
 
 Then just import store from 'react-away'.
@@ -23,7 +27,7 @@ const HelloWorld = () => <>
 </>
 ````
 
-## [Global routing props](preview/router.md)
+## [Global routing props](router.html)
 
 Propert rotuting with support to history navigation and route parameters.
 
@@ -34,47 +38,46 @@ const App => () => <>
 </>
 ````
 
-## [Two-way data binding](preview/binder.md)
+## [Two-way data binding](binder.html)
 
 Two-way data binding directive with bind property.
 
 ````html
 <input value={store.who} onInput={e => store.who = e.target.value}/>
 
-<input bind="who" /> <!-- two-way data bind with string syntax -->
+<input bind="who" /> <!-- two-way data bind alternative -->
 ````
 
-## [State synchonizers](preview/syncer.md)
+## [State synchonizers](syncer.html)
 
 RESTful API abstraction with synchronizers based in store object.
 
 ````ts
-import { todoAsync, syncher } from './todo'
-
-const { onSave } = todoAsync()
+import { todoApi } from './todoApi'
 
 const TodoItem = () => <>   
    <input bind="todo.item" />
    <button onClick={onAdd}>Add</button>
-   <button onClick={onSave}>Save</button>
-   <progress shown={syncher.isLoading} />
+   <button onClick={todoApi.onSave}>Save</button>
+   <progress hidden={!todoApi.isLoading} />
 </>
 
-const onAdd = async (e:any) => store.todo.list.push(store.todo.item)
+const onAdd = async (e:any) => 
+   store.todo.list.push(store.todo.item)
 ````
 
-## [Built-in globalization](preview/global.md)
+## [Built-in globalization](global.html)
 
 Native globalization support in ReactDOM.createRoot
 
 ````ts
 import locales from './locales'
 
-ReactDOM.createRoot(true, "#root", <App/>, context)
+ReactDOM.createRoot(true, "#root", <App/>, Store)
    .globalization(locales, true)
 ````
 
-It supports parametrization with functions.
+With parametrization with simple functions.
 
 ````tsx
 declare const locale: any
@@ -85,20 +88,20 @@ const App = () => <>
 </>
 ````
 
-## [Custom directives](preview/proper.md)
+## [Custom directives](proper.html)
 
 Attribute injection with directives in rendering time.
 
 ````tsx
 const noWrap = props => ! props.full ? props
-   : ({...props, style: { whiteSpace:"nowrap" } })
+   : ({...props, style: { whiteSpace: "nowrap" } })
 
-ReactDOM.createRoot(true, "#root", <App/>, context, [css])
+ReactDOM.createRoot(true, "#root", <App/>, Store, [noWrap])
 
 const Example = () => <h1 noWrap>This text doesn't wrap</h1>
 ````
 
-## [Event managament](preview/broker.md)
+## [Event managament](broker.html)
 
 The listener and dispatch handles DOM, React and custom events. 
 
@@ -110,26 +113,24 @@ listener.on("keydown", _ => console.log("DOM keydom event"))
 listener.on("myevent", _ => console.log("My event happens"))
 listener.on("failure", _ => console.log("any kind of error"))
 
-listener.on("myevent", console.warn) 
+listener.on("myevent", e => console.warn(e)) 
 listener.dispatch("myevent", "hello world...")
 ````
 
-## [Styling improvements](preview/style.md)
+## [Styling improvements](style.html)
 
 Component-scoped CSS and routed element styling.
 
 ````css
-button.App { color:black }      /* scoped by component Name as CSS class */
-a.routed { filter: invert(1) }  /* styled current onRoute handler element */
+button.App { color:black }      /* component-scoped CSS */
+a.routed { filter: invert(1) }  /* styled routed button */
+.test { color:red }             /* sample class name */
 ````
 
 A alternative className suggar syntax with css props.
 
-````css
-.red { color:red }
-````
 
 ````tsx
-const App = () => <> <h1 css='red'> title </h1> </>
+const App = () => <> <h1 css='test'> sample </h1> </>
 ````
 

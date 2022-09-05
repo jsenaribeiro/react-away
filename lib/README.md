@@ -30,9 +30,9 @@ Configure replacing ReactDOM by ReactDOM.
 ```tsx
 import ReactDOM from 'react-away'
 
-const context = { user: { name: "john" } }
+export class Store { user: { name: "john" } }
 
-ReactDOM.createRoot(true, "#root", <App />, context)
+ReactDOM.createRoot(true, "#root", <App />, Store)
 ```
 
 Just use with self-rendeing states and two-way data binding.

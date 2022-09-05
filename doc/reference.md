@@ -10,7 +10,7 @@ With npm installed, type the command bellow with npm (or yarn).
 Replace ReactDOM pelo ReactDOM as bellow.
 
 ```tsx
-ReactDOM.createRoot(true, "#root", <App />, context)
+ReactDOM.createRoot(true, "#root", <App />, Store)
 ```
 
 And that is: state management and two-way data binding within a full declarative component.

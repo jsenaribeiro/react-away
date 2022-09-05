@@ -1,4 +1,4 @@
-import { Store } from "../../context"
+import { Store } from "../../Store"
 import "./counter.css"
 
 declare const store: Store

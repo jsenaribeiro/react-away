@@ -73,37 +73,32 @@ listener.on(<span class="hljs-string">&quot;componentDidCatch&quot;</span>, <spa
 listener.on(<span class="hljs-string">&quot;render&quot;</span>, <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> ...)
 </div></code></pre>
 <h2 id="multiple-listeners">Multiple listeners</h2>
-<p>The listeners also supports DOM, custom and route events.</p>
-<pre><code class="language-js"><div><span class="hljs-keyword">import</span> { listener, dispatch } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+<p>The listeners also supports DOM, routing, exception and route events.</p>
+<pre><code class="language-js"><div><span class="hljs-keyword">import</span> { listener } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
 
-<span class="hljs-comment">// React life-cycle event listener</span>
-listener.on(<span class="hljs-string">&quot;mounted&quot;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> log(<span class="hljs-string">&quot;componentDidMount&quot;</span>))
-
-<span class="hljs-comment">// DOM event listener</span>
-listener.on(<span class="hljs-string">&quot;keydown&quot;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> log(<span class="hljs-string">&quot;DOM keydom event&quot;</span>))
-
-<span class="hljs-comment">// routing event listener</span>
-listener.on(<span class="hljs-string">&quot;/routed&quot;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> log(<span class="hljs-string">&quot;Route accessed&quot;</span>))
+listener.on(<span class="hljs-string">&quot;mounted&quot;</span>, <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;componentDidMount&quot;</span>))
+listener.on(<span class="hljs-string">&quot;keydown&quot;</span>, <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;DOM keydom event&quot;</span>))
+listener.on(<span class="hljs-string">&quot;failure&quot;</span>, <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;any kind of error&quot;</span>))
+listener.on(<span class="hljs-string">&quot;/routed&quot;</span>, <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Entered in route&quot;</span>))
+listener.on(<span class="hljs-string">&quot;myEvent&quot;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(e))
 </div></code></pre>
 <h2 id="custom-events">Custom events</h2>
-<p>Custom pub/sub events.</p>
+<p>Custom event follows pub/sub models.</p>
 <pre><code class="language-js"><div>listener.on(<span class="hljs-string">&quot;myevent&quot;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> log(<span class="hljs-string">&quot;My event happens&quot;</span>))
-dispatch(<span class="hljs-string">&quot;myevent&quot;</span>, <span class="hljs-string">&quot;just a pub/sub testing...&quot;</span>)
+listener.dispatch(<span class="hljs-string">&quot;myevent&quot;</span>, <span class="hljs-string">&quot;just a pub/sub testing...&quot;</span>)
 </div></code></pre>
 <h2 id="cancelable-events">Cancelable events</h2>
 <p>Cancellable event listener.</p>
 <pre><code class="language-js"><div><span class="hljs-keyword">import</span> { listener } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
 
-<span class="hljs-keyword">const</span> callback = <span class="hljs-function">() =&gt;</span> <span class="hljs-string">&quot;anyway&quot;</span>
-listener.on(<span class="hljs-string">&quot;custom&quot;</span>, callback)
+<span class="hljs-comment">// cancel all subscribers of DOM &#x27;click&#x27; event</span>
+listener.subscribers.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.eventTag == <span class="hljs-string">&quot;click&quot;</span>).cancel()
 
-<span class="hljs-keyword">const</span> subs = listener.subscribers
-
-subs.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.eventTag == <span class="hljs-string">&quot;custom&quot;</span>).cancel()
-subs.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.callback == callback).cancel()
+<span class="hljs-comment">// cancel a specific subscribed callback </span>
+listener.subscribers.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.callback == callback).cancel()
 </div></code></pre>
 <h2 id="life-cycle-synonyms">Life-cycle synonyms</h2>
-<p>Listener offers simple React life-cyle event synonyms for easy handling</p>
+<p>Simple synonyms for easy life-cyle handling.</p>
 <table>
 <thead>
 <tr>

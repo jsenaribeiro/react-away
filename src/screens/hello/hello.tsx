@@ -1,5 +1,5 @@
 import React from "react"
-import { Store } from "../../context"
+import { Store } from "../../Store"
 import { Locale } from "../../locales"
 import "./hello.css"
 

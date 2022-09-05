@@ -17,7 +17,7 @@ const LOCALES: I18N[] = []
 /** 
  * Globalization fluent class 
  */
-export class I18nEVO {
+export class I18nFluent {
    public globalization(locales: I18N[], firstIsDefault = true): AuthenticatorFluent {
       locales.forEach(l => LOCALES.push(l))
       const hasDefault = locales && locales.length > 1 && firstIsDefault

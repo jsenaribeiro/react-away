@@ -9,7 +9,7 @@ import App from './App'
 import Store from './Store'
 import ReactDOM, from 'react-away'
 
-ReactDOM.createRoot(false, "#root", <App />, new Store())
+ReactDOM.createRoot(false, "#root", <App />, Store)
 ````
 
 ## Store.ts

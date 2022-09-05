@@ -1,5 +1,5 @@
 import { synchronizer } from "../../../lib"
-import { Store } from "../../context"
+import { Store } from "../../Store"
 
 export default synchronizer({
    uid: "code",

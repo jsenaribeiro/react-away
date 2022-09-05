@@ -48,36 +48,20 @@
 <h3 id="--i18n--storing--routing--fetching--binding--handling--directive--css"><a href="./index.html">#</a> | <a href="./global.html">i18n</a> | <a href="./storer.html">Storing</a> | <strong>Routing</strong> | <a href="./syncer.html">Fetching</a> | <a href="./binder.html">Binding</a> | <a href="./broker.html">Handling</a> | <a href="./proper.html">Directive</a> | <a href="./styler.html">CSS</a></h3>
 <hr />
 <h2 id="quick-start">Quick start</h2>
-<p>The route and onRoute directives offers the basic routing features.</p>
+<p>The route and onRoute directives offers routing props.</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> App =&gt; <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">Todo</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/todo&quot;</span> /&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/hello&quot;</span> /&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">Counter</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/counter&quot;</span> /&gt;</span>
-   
-   <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/todo&quot;</span>&gt;</span>Todo<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
+   <span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/hello&quot;</span> /&gt;</span> 
+
+   <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/hello&quot;</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
-   <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/counter&quot;</span>&gt;</span>Counter<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
 <span class="hljs-tag">&lt;/&gt;</span></span>
 </div></code></pre>
 <h2 id="router-functions">Router functions</h2>
 <p>Each <strong>onRoute</strong> attribute, <strong>setRoute</strong> and <strong>letRoute</strong> functions as its router use cases.</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { setRoute, isRouted } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away/router&#x27;</span>
 
-<span class="hljs-keyword">const</span> App = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
-   { isRouted(&quot;/hello&quot;) &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> /&gt;</span> }
-   <span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">hidden</span>=<span class="hljs-string">{isRouted(</span>&quot;/<span class="hljs-attr">hello</span>&quot;)} /&gt;</span> 
-   <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{e</span> =&gt;</span> setRoute(&quot;/hello&quot;)}&gt;Hello<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
-   <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{e</span> =&gt;</span> setRoute(&quot;/detail/:id&quot;)}&gt;Hello<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
-   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{e</span> =&gt;</span> setRoute(-3)}&gt;Go back 3 routes<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-<span class="hljs-tag">&lt;/&gt;</span></span>
-
-<span class="hljs-keyword">const</span> Detail = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ID: { getRoute(&quot;id&quot;) }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-<span class="hljs-tag">&lt;/&gt;</span></span>
-
-<span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
-
-<span class="hljs-keyword">const</span> goBack3 = <span class="hljs-function">() =&gt;</span> setRoute(-<span class="hljs-number">3</span>)
+isRouted(<span class="hljs-string">&quot;/hello&quot;</span>) <span class="hljs-comment">// check the route</span>
+setRoute(<span class="hljs-string">&quot;/hello&quot;</span>) <span class="hljs-comment">// change the route</span>
 </div></code></pre>
 <h2 id="history-navigation">History navigation</h2>
 <p>Numeric arguments in <strong>setRoute</strong> enables history navigation.</p>
@@ -86,7 +70,7 @@ setRoute(-<span class="hljs-number">2</span>)  <span class="hljs-comment">// goe
 setRoute(<span class="hljs-number">3</span>)   <span class="hljs-comment">// try to advance eleven routes</span>
 </div></code></pre>
 <h2 id="route-parameters">Route parameters</h2>
-<p>The <strong>GetRoute</strong> returns its queried route parameters or the current route (when no args).</p>
+<p>The <strong>GetRoute</strong> get a route parameters.</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> App = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/user/:id&quot;</span>&gt;</span>User<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 <span class="hljs-tag">&lt;/&gt;</span></span>
@@ -95,7 +79,7 @@ getRoute()     <span class="hljs-comment">// current route</span>
 getRoute(<span class="hljs-string">&quot;id&quot;</span>) <span class="hljs-comment">// route parameter</span>
 </div></code></pre>
 <h2 id="routing-states">Routing states</h2>
-<p>The <strong>setRoute</strong> could pass states  and be received by as getRoute parameter.</p>
+<p>The <strong>setRoute</strong> could pass states and read by getRoute.</p>
 <pre><code class="language-tsx"><div>setRoute(<span class="hljs-string">&quot;/&quot;</span>, { <span class="hljs-attr">ok</span>:<span class="hljs-literal">true</span>}) 
 <span class="hljs-keyword">const</span> ok = getRoute(<span class="hljs-string">&quot;ok&quot;</span>)
 </div></code></pre>

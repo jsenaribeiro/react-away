@@ -21,7 +21,7 @@ npm i react-away --save
 ```tsx
 import ReactDOM from 'react-away'
 
-ReactDOM.createRoot(true, "#root", <App />, context)
+ReactDOM.createRoot(true, "#root", <App />, Store)
 ```
 
 ```tsx

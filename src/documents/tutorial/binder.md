@@ -4,10 +4,10 @@
 
 <hr />
 
-The unidirectional way to implement a read-write elements is like bellow. Two-way data binding allows define both properties with just one attribute directive, reducing this very recurrent implementation.
+This is the stardard unidirectional way in read-write form elements.
 
 ````html
-<input value={store.who} onInput={e => store.who = e.target.value}/>
+<input value={store.hello.who} onInput={e => store.hello.who = e.target.value}/>
 ````
 
 ## String Two-Way data binding
@@ -25,7 +25,7 @@ The lambda syntax alternative as type-checking alternative (only field path).
 ```html
 <input bind={(s:Domain) => s.hello.who} /> 
 
-<!-- exception: only supports field pathing -->
+<!-- exception: only supports field path -->
 <input bind={(s:Domain) => s.hello.who.toLowerCase()}> 
 ```
 
@@ -41,7 +41,7 @@ export const Hello = (props: any, state: any) => <>
 
 ## Form dual binding
 
-Two-way data binding for uncontrolled components (onCommit replaces onSubmit).
+Two-way data binding for uncontrolled components (WIP).
 
 ````tsx
 export const Form = (props: any) => <>
@@ -56,7 +56,7 @@ export const Form = (props: any) => <>
 
 ## Custom validation
 
-Also supports custom validation in **validate** property integrated to HTML Validation API.
+Custom validation with **validate** props integrated to HTML Validation API.
 
 ````tsx
 const custom = mode =>      
@@ -70,7 +70,7 @@ const ex = () => <input validate={custom} name="date" />
 
 ## onCommit handler
 
-The onCommit replaces onSubmit in form bind receiving a list of errors.
+The onSubmit is replaced by onCommit replaces (WIP).
 
 ````tsx
 function handleSubmit(errors: Validation[]) {

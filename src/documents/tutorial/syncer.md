@@ -23,10 +23,10 @@ export const todoAsync = synchronizer({
 
 ## Contextual state
 
-Get contextual state with syncher object
+A syncher object offers a contextual state information.
 
 ````tsx
-import { syncher } from 'react-away'
+import { todoApi } from './todoApi'
 
 syncher.exception  // current error message and validations
 syncher.isSuccess  // self-rendering success flag for savings
@@ -35,49 +35,25 @@ syncher.outOfSync  // flag for out of sync remote states
 syncher.canceller  // request cancellation function
 ````
 
-## CRUD example
+## Save/load example
 
 It returns the mapped synced list with true argument.
 
 ````tsx
-import { listener } from 'react-away'
-import { todoAsync } from './todo'
+import helloApi from './helloApi'
 
-const { onSave, loadAsync } = todoAsync()
+declare const store: any
 
-listener.on("/todo", x => loadAsync())
-
-const Todo = (props: any) => <>
-   <h1>TODO List</h1>
-   <input bind="text" />
-   <button onClick={onAdd}>Add</button>
-   <button onClick={onSave}>Save</button>
-	{ todoAsync()?.map(TodoItem) }
+const Hello = (props: any) => <>
+   <h1>Hello, { store.hello }</h1>
+   <input bind={e => e.hello} />
+   
+   <button onClick={todoApi.onLoad}>Load</button>
+   <button onClick={todoApi.onSave}>Save</button>
 </>
-
-const TodoItem = (task) => <>
-	<li key={id}>
-      <a onClick={_ => store.todo.item = task}>=</a> |
-      <a onClick={onDrop(task.id)}>-</a> |
-      { task }
-   </li>
-</>
-
-const onAdd = (state: any) => async (event: any) => {
-   if (!state.id) store.todos.push(state)
-   else store.todos
-      .filter(x => x.id === state.id)
-      .forEach((_,i) => store.todos[i] = state)
-   }
-
-   if (!state.id) state.text = ""
-}
-
-const onDrop = (id:string) = (e:any) => 
-   store.todos = store.todos.filter(x => x.id != id)
 ````
 
-## Loading
+## Loading flag
 
 The syncher object expose a self-rendering loading flag.
 
@@ -96,12 +72,10 @@ It supports cancellation, timeout, poolin and cache.
 import { synchronizer, syncher } from 'react-away'
 
 export const todoAsync = synchronizer({
-   etc...,
-
    timeout: 9000 // overall timeout for an request
    caching: 3000 // timeout cache-key expiration
-   retries: 3    // retries after for an request
    pooling: 1000 // delay for request looping
+   retries: 3    // retries after for an request
 })
 
 syncher.canceller.abort() // request cancellation
@@ -124,9 +98,7 @@ The login, logon and logout functions for full authentication cycle.
 ````tsx
 import { login, logon, logout } from 'react-away'
 
-await login(username, password)
-
-logon() // return JWT token decoded object
-
+await login(username, password) // authenticating user
+const current = logon() // return JWT token decoded object
 logout() // finish the token session
 ````

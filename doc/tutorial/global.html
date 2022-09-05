@@ -28,8 +28,7 @@
 }
 
 </style>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
 <style>
@@ -69,80 +68,21 @@
    <span class="hljs-attr">welcome</span>: <span class="hljs-built_in">string</span>,
    <span class="hljs-attr">hello</span>: <span class="hljs-function">(<span class="hljs-params">who: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">string</span>
 }
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> en:Locale = {
-   <span class="hljs-attr">language</span>: <span class="hljs-string">&quot;en&quot;</span>,
-   <span class="hljs-attr">identity</span>: <span class="hljs-string">&quot;English&quot;</span>,
-   <span class="hljs-attr">currency</span>: <span class="hljs-function">(<span class="hljs-params">money: <span class="hljs-built_in">number</span></span>) =&gt;</span> <span class="hljs-string">`$ <span class="hljs-subst">${money.toFixed(<span class="hljs-number">2</span>)}</span>`</span>,
-   <span class="hljs-attr">datetime</span>: <span class="hljs-function">(<span class="hljs-params">value: <span class="hljs-built_in">Date</span></span>) =&gt;</span> value.toUTCString(),
-   <span class="hljs-attr">welcome</span>: <span class="hljs-string">&quot;Welcome&quot;</span>,
-   <span class="hljs-attr">hello</span>: <span class="hljs-function">(<span class="hljs-params">who: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-string">`Hello <span class="hljs-subst">${who}</span>`</span>
-}
-
-<span class="hljs-keyword">const</span> cssPropsExceptForm = <span class="hljs-function">(<span class="hljs-params">props: <span class="hljs-built_in">any</span>, args: DirectiveArgs</span>) =&gt;</span> 
-   args.tag == <span class="hljs-string">&quot;form&quot;</span> : props : ({...props, <span class="hljs-attr">className</span>: props.css })
-
-
-<span class="hljs-keyword">import</span> { cssPropsExceptForm } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./cssPropsExceptForm&#x27;</span>
-
-<span class="hljs-keyword">const</span> directives = [cssPropsExceptForm]
-
-ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, store, directives)
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">directive</span>(<span class="hljs-params">props: Props&lt;T&gt;, args: DirectiveArgs</span>): <span class="hljs-title">Props</span>&lt;<span class="hljs-title">T</span>|<span class="hljs-title">any</span>&gt;
-
-
-</span></div></code></pre>
+</div></code></pre>
 <h2 id="startup-configuration">Startup configuration</h2>
 <p>Join all locales with globalization object with its path.</p>
 <pre><code class="language-ts"><div><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
 <span class="hljs-keyword">import</span> locales <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./locales&#x27;</span>
 
-ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, context)
+ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, Store)
    .globalization(locales, <span class="hljs-literal">true</span>)  
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Locale <span class="hljs-keyword">extends</span> I18N {
    hello(who: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>
 }
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> synchronizer({
-   <span class="hljs-attr">uid</span>: <span class="hljs-string">&quot;id&quot;</span>,
-   <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;http://localhost:3000/hello&quot;</span>,
-   <span class="hljs-attr">map</span>: <span class="hljs-function">(<span class="hljs-params">s: Store</span>) =&gt;</span> s.hello,
-
-   <span class="hljs-attr">update</span>: {
-      <span class="hljs-attr">route</span>: <span class="hljs-string">&quot;/update&quot;</span>,
-      <span class="hljs-attr">hasIdField</span>: <span class="hljs-literal">false</span>,
-   }
-})
-
-
-<span class="hljs-keyword">import</span> { login, logon, logout } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
-
-<span class="hljs-keyword">await</span> login(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-number">123</span>)
-<span class="hljs-keyword">const</span> user = logon()
-logout()
-
-<span class="hljs-keyword">import</span> { syncher } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
-<span class="hljs-keyword">import</span> { helloAsync } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../asyncs/hello&#x27;</span>
-
-<span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> store: <span class="hljs-built_in">any</span>
-<span class="hljs-keyword">const</span> { onSave } = helloAsync()
-<span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
-   { syncher.isLoading &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">progress</span> /&gt;</span> }
-   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, { store.hello }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onSave}</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">&quot;hello&quot;</span> /&gt;</span>
-<span class="hljs-tag">&lt;/&gt;</span></span>
-
-<span class="hljs-keyword">import</span> { listener } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
-
-listener.on(<span class="hljs-string">&quot;custom&quot;</span>, <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> log(e))
-listener.dispatch(<span class="hljs-string">&quot;custom&quot;</span>, <span class="hljs-literal">true</span>)
-
 </div></code></pre>
 <h2 id="changing-language">Changing language</h2>
-<p>Navigation language is selected by default, the useLanguage change the current language manually.</p>
+<p>The default navigation language could be changed by useLanguage.</p>
 <pre><code class="language-ts"><div><span class="hljs-keyword">import</span> { useLanguage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
 
 <span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> locale: <span class="hljs-built_in">any</span>
@@ -156,7 +96,7 @@ useLanguage(<span class="hljs-string">&quot;pt&quot;</span>)
 </div></code></pre>
 <h2 id=""></h2>
 
-        <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
         
     </body>
     </html>

@@ -47,8 +47,8 @@
         <h1 id="react-away">React Away</h1>
 <h3 id="--i18n--storing--routing--fetching--binding--handling--directive--css"><a href="./index.html">#</a> | <a href="./global.html">i18n</a> | <a href="./storer.html">Storing</a> | <a href="./router.html">Routing</a> | <a href="./syncer.html">Fetching</a> | <strong>Binding</strong> | <a href="./broker.html">Handling</a> | <a href="./proper.html">Directive</a> | <a href="./styler.html">CSS</a></h3>
 <hr />
-<p>The unidirectional way to implement a read-write elements is like bellow. Two-way data binding allows define both properties with just one attribute directive, reducing this very recurrent implementation.</p>
-<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{store.who}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{e</span> =&gt;</span> store.who = e.target.value}/&gt;
+<p>This is the stardard unidirectional way in read-write form elements.</p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{store.hello.who}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{e</span> =&gt;</span> store.hello.who = e.target.value}/&gt;
 </div></code></pre>
 <h2 id="string-two-way-data-binding">String Two-Way data binding</h2>
 <p>Two-way data binding with bind field path for store object.</p>
@@ -58,7 +58,7 @@
 <p>The lambda syntax alternative as type-checking alternative (only field path).</p>
 <pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">{(s:Domain)</span> =&gt;</span> s.hello.who} /&gt; 
 
-<span class="hljs-comment">&lt;!-- exception: only supports field pathing --&gt;</span>
+<span class="hljs-comment">&lt;!-- exception: only supports field path --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">{(s:Domain)</span> =&gt;</span> s.hello.who.toLowerCase()}&gt; 
 </div></code></pre>
 <h2 id="local-state-two-way-data-binding">Local state Two-Way data binding</h2>
@@ -68,7 +68,7 @@
 <span class="hljs-tag">&lt;/&gt;</span></span>
 </div></code></pre>
 <h2 id="form-dual-binding">Form dual binding</h2>
-<p>Two-way data binding for uncontrolled components (onCommit replaces onSubmit).</p>
+<p>Two-way data binding for uncontrolled components (WIP).</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Form = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">&quot;profile&quot;</span> <span class="hljs-attr">onCommit</span>=<span class="hljs-string">{handle}</span>&gt;</span>
       Name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> /&gt;</span>
@@ -79,7 +79,7 @@
 <span class="hljs-tag">&lt;/&gt;</span></span>
 </div></code></pre>
 <h2 id="custom-validation">Custom validation</h2>
-<p>Also supports custom validation in <strong>validate</strong> property integrated to HTML Validation API.</p>
+<p>Custom validation with <strong>validate</strong> props integrated to HTML Validation API.</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> custom = <span class="hljs-function"><span class="hljs-params">mode</span> =&gt;</span>      
    ! mode ? <span class="hljs-string">&quot;is required&quot;</span>
    ? mode.length &lt; <span class="hljs-number">3</span>
@@ -89,7 +89,7 @@
 <span class="hljs-keyword">const</span> ex = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">validate</span>=<span class="hljs-string">{custom}</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;date&quot;</span> /&gt;</span></span>  
 </div></code></pre>
 <h2 id="oncommit-handler">onCommit handler</h2>
-<p>The onCommit replaces onSubmit in form bind receiving a list of errors.</p>
+<p>The onSubmit is replaced by onCommit replaces (WIP).</p>
 <pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleSubmit</span>(<span class="hljs-params">errors: Validation[]</span>) </span>{
    <span class="hljs-keyword">if</span> (errors.length &gt; <span class="hljs-number">0</span>) 
       <span class="hljs-comment">// handling errors</span>

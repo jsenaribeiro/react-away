@@ -19,7 +19,7 @@ const defaultSyncApi = {
    querier: (_: any) => ({})
 }
 
-export const error = (text: string) => new Error("REACT-EVO (syncer): " + text)
+export const error = (text: string) => new Error("REACT-AWAY (syncer): " + text)
 
 export const defineSync = <D,T>(arg: ISyncApi<D,T>): SyncApi<D,T> => 
 ({

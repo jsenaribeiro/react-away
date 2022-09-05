@@ -42,28 +42,25 @@ listener.on("render", x => ...)
 
 ## Multiple listeners
 
-The listeners also supports DOM, custom and route events.
+The listeners also supports DOM, routing, exception and route events.
 
 ````js
-import { listener, dispatch } from 'react-away'
+import { listener } from 'react-away'
 
-// React life-cycle event listener
-listener.on("mounted", e => log("componentDidMount"))
-
-// DOM event listener
-listener.on("keydown", e => log("DOM keydom event"))
-
-// routing event listener
-listener.on("/routed", e => log("Route accessed"))
+listener.on("mounted", _ => console.log("componentDidMount"))
+listener.on("keydown", _ => console.log("DOM keydom event"))
+listener.on("failure", _ => console.log("any kind of error"))
+listener.on("/routed", _ => console.log("Entered in route"))
+listener.on("myEvent", e => console.log(e))
 ````
 
 ## Custom events
 
-Custom pub/sub events.
+Custom event follows pub/sub models.
 
 ````js
 listener.on("myevent", e => log("My event happens"))
-dispatch("myevent", "just a pub/sub testing...")
+listener.dispatch("myevent", "just a pub/sub testing...")
 ````
 
 ## Cancelable events
@@ -73,18 +70,16 @@ Cancellable event listener.
 ````js
 import { listener } from 'react-away'
 
-const callback = () => "anyway"
-listener.on("custom", callback)
+// cancel all subscribers of DOM 'click' event
+listener.subscribers.filter(x => x.eventTag == "click").cancel()
 
-const subs = listener.subscribers
-
-subs.filter(x => x.eventTag == "custom").cancel()
-subs.filter(x => x.callback == callback).cancel()
+// cancel a specific subscribed callback 
+listener.subscribers.filter(x => x.callback == callback).cancel()
 ````
 
 ## Life-cycle synonyms
 
-Listener offers simple React life-cyle event synonyms for easy handling
+Simple synonyms for easy life-cyle handling.
 
 | Methods              | Label     | Description                          |
 | -------------------- | --------- | ------------------------------------ |

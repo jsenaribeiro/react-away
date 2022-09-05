@@ -4,7 +4,7 @@ import ptBr from "./pt-br"
 
 export interface Locale extends I18N {
    title: string,
-   hello: string,
+   hello(who: string): string,
    welcome: string,
    stateManagement: string,
 }

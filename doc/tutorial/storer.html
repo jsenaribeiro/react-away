@@ -48,34 +48,29 @@
 <h3 id="--i18n--storing--routing--fetching--binding--handling--directive--css"><a href="./index.html">#</a> | <a href="./global.html">i18n</a> | <strong>Storing</strong> | <a href="./router.html">Routing</a> | <a href="./syncer.html">Fetching</a> | <a href="./binder.html">Binding</a> | <a href="./broker.html">Handling</a> | <a href="./proper.html">Directive</a> | <a href="./styler.html">CSS</a></h3>
 <hr />
 <h2 id="configuration">Configuration</h2>
-<p>Bellow a basic React configuration.</p>
+<p>Bellow a basic React settings.</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom/client&#x27;</span>
 
 ReactDOM.createRoot(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;root&#x27;</span>) <span class="hljs-keyword">as</span> HTMLElement)
    .render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.StrictMode</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span>)
 </div></code></pre>
-<p>React Away just replaces ReactDOM with ReactDOM (without no provider).</p>
-<pre><code class="language-tsx"><div>ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, context)
+<p>React Away replaces React with its ReactDOM (avoid providers).</p>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, Store)
 </div></code></pre>
-<pre><code class="language-tsx"><div>ReactDOM.createRoot(     <span class="hljs-comment">// SIGNATURE</span>
-   strict: boolean,      <span class="hljs-comment">// define strict mode</span>
-   <span class="hljs-attr">root</span>: string,         <span class="hljs-comment">// root query selector</span>
-   <span class="hljs-attr">app</span>: JSX.Element,     <span class="hljs-comment">// App JSX Element</span>
-   <span class="hljs-attr">context</span>: any,         <span class="hljs-comment">// object story</span>
-   <span class="hljs-attr">directives</span>: Proper[]  <span class="hljs-comment">// custom directives</span>
+<p>React Away has a easier API with extra features.</p>
+<pre><code class="language-tsx"><div>ReactDOM.createRoot(     
+   strict: boolean,         <span class="hljs-comment">// define strict mode</span>
+   <span class="hljs-attr">root</span>: string,            <span class="hljs-comment">// root query selector</span>
+   <span class="hljs-attr">app</span>: JSX.Element,        <span class="hljs-comment">// App JSX Element</span>
+   <span class="hljs-attr">store</span>: any,              <span class="hljs-comment">// object story</span>
+   <span class="hljs-attr">directives</span>: Directive[]  <span class="hljs-comment">// custom directives</span>
 )
 </div></code></pre>
-<h2 id="contextual-state">Contextual state</h2>
-<p>The configuration could be retrieved by render object</p>
-<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { render } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
-
-render.context <span class="hljs-comment">// original store context object</span>
-render.stricted <span class="hljs-comment">// check if it is in strict mode</span>
-render.directives <span class="hljs-comment">// all current registered directives</span>
-</div></code></pre>
 <h2 id="self-rendering">Self-rendering</h2>
-<p>The store object is global (inside window), available globally in application as SSOT.</p>
-<pre><code class="language-ts"><div><span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> store: <span class="hljs-built_in">any</span> <span class="hljs-comment">// declare is needed in typescript</span>
+<p>The store object is expose as a global object, available globally in all part of application as SSOT without imports.</p>
+<pre><code class="language-ts"><div><span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> store: <span class="hljs-built_in">any</span> <span class="hljs-comment">// required only for typescript</span>
 
 <span class="hljs-keyword">const</span> HelloWorld = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, { store.who || &quot;World&quot; }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
@@ -83,9 +78,8 @@ render.directives <span class="hljs-comment">// all current registered directive
 <span class="hljs-tag">&lt;/&gt;</span></span>
 </div></code></pre>
 <h2 id="local-state">Local state</h2>
-<p>React Away useState modular hook is also a self-rendering object.</p>
-<pre><code class="language-tsx"><div>
-<span class="hljs-keyword">const</span> Hello = (props: any, <span class="hljs-attr">state</span>: any) = <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+<p>React Away define a local state using the second arguments in a functional component, as bellow (all fields are started undefined).</p>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> Hello = (props: any, <span class="hljs-attr">state</span>: any) = <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{ state.hello || &quot;World&quot; }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{state.hello}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{onInput(state)}</span> /&gt;</span> 
 <span class="hljs-tag">&lt;/&gt;</span></span>
@@ -93,7 +87,7 @@ render.directives <span class="hljs-comment">// all current registered directive
 <span class="hljs-keyword">const</span> onInput = <span class="hljs-function">(<span class="hljs-params">s: any</span>) =&gt;</span> <span class="hljs-function">(<span class="hljs-params">e: any</span>) =&gt;</span> s.hello = e.target.value
 </div></code></pre>
 <h2 id="multiple-stores">Multiple stores</h2>
-<p>The useStore inject in global scope a inner object of store object.</p>
+<p>The useStore offes multiple stores exposing inside store object.</p>
 <pre><code class="language-tsx"><div>useStore&lt;Store&gt;(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.profile.user)
 useStore&lt;Store&gt;(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.todo)
 

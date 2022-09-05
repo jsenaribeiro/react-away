@@ -2,11 +2,11 @@ import React from 'react'
 
 import './index.css'
 import App from './App'
-import domain, { Store } from './context'
+import Store from './Store'
 import locales from './locales'
 import ReactDOM, { listener } from '../lib'
 
-ReactDOM.createRoot(false, "#root", <App />, domain)
+ReactDOM.createRoot(false, "#root", <App />, Store)
    .globalization(locales, true)
    .authentication("GET", false, true)
       .login("http://localhost:4000/login")

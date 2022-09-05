@@ -35,7 +35,7 @@ const Hello = () => <><button>black</button></>
 
 ## Styled routing
 
-The element with onRoute property with the current route, is styled using 'routed' CSS class.
+The onRoute elements in current route could be styled.
 
 ```html
 <a onRoute="/hello">Hello</a> 
@@ -43,5 +43,6 @@ The element with onRoute property with the current route, is styled using 'route
 ```
 
 ```css
+/* selected link behavior as current route  */
 a.routed { color: white; background: black; }
 ```

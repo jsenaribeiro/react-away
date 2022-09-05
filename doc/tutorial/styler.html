@@ -67,11 +67,12 @@
 <span class="hljs-keyword">const</span> Hello = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>black<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;/&gt;</span></span>
 </div></code></pre>
 <h2 id="styled-routing">Styled routing</h2>
-<p>The element with onRoute property with the current route, is styled using 'routed' CSS class.</p>
+<p>The onRoute elements in current route could be styled.</p>
 <pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/hello&quot;</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
 <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/counter&quot;</span>&gt;</span>Counter<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> 
 </div></code></pre>
-<pre><code class="language-css"><div><span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.routed</span> { <span class="hljs-attribute">color</span>: white; <span class="hljs-attribute">background</span>: black; }
+<pre><code class="language-css"><div><span class="hljs-comment">/* selected link behavior as current route  */</span>
+<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.routed</span> { <span class="hljs-attribute">color</span>: white; <span class="hljs-attribute">background</span>: black; }
 </div></code></pre>
 
         
