@@ -1,5 +1,39 @@
 # React Away
 
+
+## Quick Start
+
+Installation, configuration and implementation.
+
+```cmd
+npm i react-away --save
+```
+
+Configure replacing ReactDOM by ReactDOM.
+
+```tsx
+import ReactDOM from 'react-away'
+
+export class Store { user: { name: "john" } }
+
+ReactDOM.createRoot(true, "#root", <App />, Store)
+```
+
+Just use with self-rendeing states and two-way data binding.
+
+```tsx
+import Store from './Store'
+
+declare const store: Store
+
+export const HelloWorld = () => <>
+   <h1>Hello, {store.user.name} !</h1>
+   Name: <input bind="user.name"} /> 
+</>
+```
+
+# Summary
+
 | #    | Features                                    | Description                                                  |
 | ---- | ------------------------------------------- | ------------------------------------------------------------ |
 | 1    | [Declarative style](#1-declarative-style)   | Functional component with no imperative code                 |
@@ -10,7 +44,7 @@
 | 6    | [Routing properties](#routing-properties)   | Declarative routing with history navigation and route parameters |
 | 7    | [Directive handling ](#directive-handling)  | Property programming with two-way data binding and component-scoped CSS |
 
-# Declarative Style
+## Declarative Style
 
 Like hooks intruduced stateful functional components, here it is intruduced a fully declarative funcional components with states.
 
@@ -42,9 +76,9 @@ const FunctionalDeclarativeCounter = (props: any) => <>
 </>
 ````
 
-# State Management
+## State Management
 
-## Local State Handling
+### Local State Handling
 
 ````tsx
 const Hello = (props, state) => <>
@@ -53,7 +87,7 @@ const Hello = (props, state) => <>
 </>
 ````
 
-## Global state management
+### Global state management
 
 ````tsx
 ReactDOM.createRoot(true, "#root", <App />, store)
@@ -69,7 +103,7 @@ const Hello = (props) => <>
 fetch(url).then(x => x.json()).then(x => store.hello = x)
 ````
 
-## Partial state distribution
+### Partial state distribution
 
 ````tsx
 export default useState({ hello: "world" })
@@ -83,9 +117,9 @@ const Hello = (props) => <>
 </>
 ````
 
-# Event Management
+## Event Management
 
-## Multi-listening
+### Multi-listening
 
 * React Life-Cycle
 * DOM listeners
@@ -93,7 +127,7 @@ const Hello = (props) => <>
 * Handled Exception (failure)
 * Custom messaging
 
-## Cancelable events
+### Cancelable events
 
 ````tsx
 // tagName || callback
@@ -101,7 +135,7 @@ listener.subscribers.filter(...).cancel()
 ````
 
 
-## Life-cycle synonyms
+### Life-cycle synonyms
 
 | synonym | life-cycle           |
 | ------- | -------------------- |
@@ -110,9 +144,9 @@ listener.subscribers.filter(...).cancel()
 | unmount | componentWillUnmount |
 | catched | componentDidCatch    |
 
-# Lite globalization
+## Lite globalization
 
-## Definition
+### Definition
 
 ```tsx
 import { I18N } from 'react-away'
@@ -145,7 +179,7 @@ const pt: Locale = {
 export default [en,pt]
 ```
 
-## Configuration
+### Configuration
 
 ````tsx
 import ReactDOM from 'react-away'
@@ -155,7 +189,7 @@ ReactDOM.createRoot(true, "#root", <App />)
    .globalization(locales, true)  
 ````
 
-## Implementation
+### Implementation
 
 ````tsx
 import { useLanguage } from 'react-away'
@@ -170,9 +204,9 @@ const App = () => <>
 </>
 ````
 
-# API Synchronization
+## API Synchronization
 
-## Configuration
+### Configuration
 
 ````tsx
 import { synchronizer } from 'react-away'
@@ -197,7 +231,7 @@ export default synchronizer({
 })
 ````
 
-## Authentication
+### Authentication
 
 ````tsx
 import ReactDOM, { login, logon, logout }  from 'react-away'
@@ -217,7 +251,7 @@ logout()
 
 ````
 
-## Implementation
+### Implementation
 
 ````tsx
 import { syncher } from 'react-away'
@@ -236,9 +270,9 @@ const Hello = (props) => <>
 
 ````
 
-# Routing properties
+## Routing properties
 
-## Declaration
+### Declaration
 
 ````tsx
 export const App = (props: any) => <>
@@ -251,7 +285,7 @@ export const App = (props: any) => <>
 </>
 ````
 
-## Parameters
+### Parameters
 
 ````tsx
 export const App = (props: any) => <>
@@ -272,7 +306,7 @@ export const Hello = (props: any) => <>
 </>
 ````
 
-## Navigation
+### Navigation
 
 ````tsx
 import { setRoute } from 'react-away'
@@ -288,9 +322,9 @@ export const App = (props: any) => <>
 </>
 ````
 
-# Directive handling
+## Directive handling
 
-## Two-Way Data Binding
+### Two-Way Data Binding
 
 ````tsx
 declare const store: any
@@ -308,7 +342,7 @@ const local2wayDataBinding = (props: any, state: any) => <>
 </>
 ````
 
-## Component-Scoped CSS
+### Component-Scoped CSS
 
 ````css
 /* style.css */
@@ -322,9 +356,9 @@ const App = () => <h1> My blue title </h1>
 const Hello = () => <h1> My red title </h1>
 ````
 
-## Custom Directive Programming
+### Custom Directive Programming
 
-## Implementation
+### Implementation
 
 ````tsx
 import ReactDOM from 'react-away'
@@ -345,13 +379,13 @@ declare module 'react' {
 }
 ````
 
-## Explanation
+### Explanation
 
 * **what a directive could do?** routing props, two-way data binding, component-scoped css, etc.
 * **when use it instead of components?** when you don't want new components for new behaviors
 * **is like an Angular rattribute directive?** it doesn't need a new property, could just change props
 
-## Conception
+### Conception
 
 * **property injection**: inject external properties inside elements and components
 * **dependency injection**: a component has props, a directive has components
