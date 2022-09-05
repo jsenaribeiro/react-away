@@ -109,7 +109,7 @@ const Hello = (props) => <>
 fetch(url).then(x => x.json()).then(x => store.hello = x)
 ````
 
-### Partial state distribution
+### Lateral state distribution
 
 ````tsx
 export default useState({ hello: "world" })
