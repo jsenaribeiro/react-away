@@ -96,10 +96,15 @@ const Hello = (props, state) => <>
 ### Global state management
 
 ````tsx
-ReactDOM.createRoot(true, "#root", <App />, store)
+import ReactDOM from 'react-away'
+export class Store { user: { name: "john" } }
+
+ReactDOM.createRoot(true, "#root", <App />, Store)
 ````
 
 ````tsx
+import { Store } from '../'
+
 declare const store: Store
 
 const Hello = (props) => <>
@@ -127,11 +132,15 @@ const Hello = (props) => <>
 
 ### Multi-listening
 
-* React Life-Cycle
-* DOM listeners
-* Routing changes 
-* Handled Exception (failure)
-* Custom messaging
+````tsx
+import { listener } from 'react-away'
+
+listener.on("mounted", _ => console.log("componentDidMount"))
+listener.on("keydown", _ => console.log("DOM keydom event"))
+listener.on("failure", _ => console.log("any kind of error"))
+listener.on("/routed", _ => console.log("Entered in route"))
+listener.on("myEvent", e => console.log(e))
+````
 
 ### Cancelable events
 
@@ -139,7 +148,6 @@ const Hello = (props) => <>
 // tagName || callback
 listener.subscribers.filter(...).cancel()
 ````
-
 
 ### Life-cycle synonyms
 
@@ -249,7 +257,6 @@ ReactDOM.createRoot(true, "#root", <App />)
            .login("http://localhost:4000/login")
            .token(s => s.access_token)
            .route("/", "/unauthorized")
-
 
 await login("test", 123)
 const user = logon()
