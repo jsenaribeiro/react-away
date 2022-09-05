@@ -4,7 +4,7 @@
 
 <br/>
 
-> YouTube [React EVO tutorial](https://www.youtube.com/watch?v=9ugQcP9clMQ)
+> YouTube [React Away tutorial](https://www.youtube.com/watch?v=9ugQcP9clMQ)
 
 
 ## Quick Start
