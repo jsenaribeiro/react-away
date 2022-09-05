@@ -1,5 +1,11 @@
 # React Away
 
+## **React Away** is a React SPA micro-framework with an agile stateful approach with self-rendering states, RESTful synchornizers, property directives, two-way data binding, component-scoped CSS, routing directives, among others.
+
+<br/>
+
+> YouTube [React EVO tutorial](https://www.youtube.com/watch?v=9ugQcP9clMQ)
+
 
 ## Quick Start
 

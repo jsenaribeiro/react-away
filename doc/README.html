@@ -46,13 +46,16 @@
     <body class="vscode-body vscode-light">
         <h2 id="react-away-is-a-react-spa-micro-framework-with-an-agile-stateful-approach-with-self-rendering-states-restful-synchornizers-property-directives-two-way-data-binding-component-scoped-css-routing-directives-among-others"><strong>React Away</strong> is a React SPA micro-framework with an agile stateful approach with self-rendering states, RESTful synchornizers, property directives, two-way data binding, component-scoped CSS, routing directives, among others.</h2>
 <br/>
+<blockquote>
+<p>YouTube <a href="https://www.youtube.com/watch?v=9ugQcP9clMQ">React EVO tutorial</a></p>
+</blockquote>
 <h1 id="quick-start">Quick Start</h1>
 <p>With npm installed, type the command bellow with npm (or yarn).</p>
 <pre><code class="language-console"><div><span class="hljs-meta">&gt;</span><span class="bash"> npm i react-away --save</span>
 <span class="hljs-meta">&gt;</span><span class="bash"> yarn add react-away</span>
 </div></code></pre>
 <p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre><code class="language-tsx"><div>ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, context)
+<pre><code class="language-tsx"><div>ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, Store)
 </div></code></pre>
 <p>And that is: state management and two-way data binding within a full declarative component.</p>
 <pre><code class="language-tsx"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> HelloWorld = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>

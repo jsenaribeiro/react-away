@@ -11,14 +11,14 @@
       <script>
          localStorage.setItem("tab", "tutorial")
          
-         const HOME_URL = 'home.html'
+         const HOME_URL = 'README.html'
          const TUTORIAL_URL = 'tutorial/index.html'
          const SAMPLING_URL = 'sampling/index.html'
          const REFERENCE_URL = 'reference/index.html'
 
          function setIframe(src) {
             const fix = src === REFERENCE_URL ? 'ref' : 'mdd'
-            const uid = '#' + (src === HOME_URL ? 'home' : src.split('/')[0])
+            const uid = '#' + (src === HOME_URL ? 'README' : src.split('/')[0])
 
             const iframe = document.getElementById("iframe")
             iframe.className = fix
@@ -35,7 +35,7 @@
       <section>
          <img src="logo.png" />
          <ul>
-            <li id="home" onclick="setIframe('home.html')">Overview</li>
+            <li id="README" onclick="setIframe('README.html')">Overview</li>
             <li id="tutorial" onclick="setIframe('tutorial/index.html')">Tutorial</li>
             <li id="sampling" onclick="setIframe('sampling/index.html')">Sample</li>
             <li id="reference" onclick="setIframe('reference/index.html')">Reference</li>            
@@ -43,7 +43,7 @@
       </section>
 
       <iframe id="iframe">
-         testing...
+         awaiting...
       </iframe>
    </body>
 
