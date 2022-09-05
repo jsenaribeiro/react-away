@@ -84,7 +84,7 @@ const FunctionalDeclarativeCounter = (props: any) => <>
 
 ## State Management
 
-### Local State Handling
+### Local state handling
 
 ````tsx
 const Hello = (props, state) => <>
@@ -114,7 +114,7 @@ const Hello = (props) => <>
 fetch(url).then(x => x.json()).then(x => store.hello = x)
 ````
 
-### Lateral state distribution
+### Lateral state collaboration
 
 ````tsx
 export default useState({ hello: "world" })
@@ -257,6 +257,7 @@ ReactDOM.createRoot(true, "#root", <App />)
            .login("http://localhost:4000/login")
            .token(s => s.access_token)
            .route("/", "/unauthorized")
+
 
 await login("test", 123)
 const user = logon()
