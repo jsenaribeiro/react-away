@@ -2,7 +2,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>&ast;&ast;React Away&ast;&ast; is a React SPA micro-framework with an agile stateful approach with self-rendering states&comma; RESTful synchornizers&comma; property directives&comma; two-way data binding&comma; component-scoped CSS&comma; routing directives&comma; among others&period;</title>
+        <title>React Away</title>
         <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -28,7 +28,8 @@
 }
 
 </style>
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
 <style>
@@ -44,44 +45,372 @@
         
     </head>
     <body class="vscode-body vscode-light">
-        <h2 id="react-away-is-a-react-spa-micro-framework-with-an-agile-stateful-approach-with-self-rendering-states-restful-synchornizers-property-directives-two-way-data-binding-component-scoped-css-routing-directives-among-others"><strong>React Away</strong> is a React SPA micro-framework with an agile stateful approach with self-rendering states, RESTful synchornizers, property directives, two-way data binding, component-scoped CSS, routing directives, among others.</h2>
+        <h1 id="react-away">React Away</h1>
+<h2 id="react-away-is-a-react-spa-micro-framework-with-an-agile-stateful-approach-with-self-rendering-states-restful-synchornizers-property-directives-two-way-data-binding-component-scoped-css-routing-directives-among-others"><strong>React Away</strong> is a React SPA micro-framework with an agile stateful approach with self-rendering states, RESTful synchornizers, property directives, two-way data binding, component-scoped CSS, routing directives, among others.</h2>
 <br/>
 <blockquote>
 <p>YouTube <a href="https://www.youtube.com/watch?v=9ugQcP9clMQ">React EVO tutorial</a></p>
 </blockquote>
-<h1 id="quick-start">Quick Start</h1>
-<p>With npm installed, type the command bellow with npm (or yarn).</p>
-<pre><code class="language-console"><div><span class="hljs-meta">&gt;</span><span class="bash"> npm i react-away --save</span>
-<span class="hljs-meta">&gt;</span><span class="bash"> yarn add react-away</span>
+<h2 id="quick-start">Quick Start</h2>
+<p>Installation, configuration and implementation.</p>
+<pre><code class="language-cmd"><div>npm i react-away --save
 </div></code></pre>
-<p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre><code class="language-tsx"><div>ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, Store)
+<p>Configure replacing ReactDOM by ReactDOM.</p>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Store</span> </span>{ user: { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;john&quot;</span> } }
+
+ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, Store)
 </div></code></pre>
-<p>And that is: state management and two-way data binding within a full declarative component.</p>
-<pre><code class="language-tsx"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> HelloWorld = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+<p>Just use with self-rendeing states and two-way data binding.</p>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> Store <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Store&#x27;</span>
+
+declare <span class="hljs-keyword">const</span> store: Store
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> HelloWorld = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, {store.user.name} !<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
    Name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">&quot;user.name&quot;</span>} /&gt;</span> 
 <span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h1 id="summary">Summary</h1>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Features</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="#1-declarative-style">Declarative style</a></td>
+<td>Functional component with no imperative code</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#state-management">State management</a></td>
+<td>Asynchronous self-rendering proxy states</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#event-management">Event management</a></td>
+<td>Cancelable multi-listener handler</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#lite-globalization">Lite globalization</a></td>
+<td>Built-in I18n typed-driven localization</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#api-synchronization">API synchronization</a></td>
+<td>RESTful abstraction with JWT, cache, retries, etc</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#routing-properties">Routing properties</a></td>
+<td>Declarative routing with history navigation and route parameters</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#directive-handling">Directive handling </a></td>
+<td>Property programming with two-way data binding and component-scoped CSS</td>
+</tr>
+</tbody>
+</table>
+<h2 id="declarative-style">Declarative Style</h2>
+<p>Like hooks intruduced stateful functional components, here it is intruduced a fully declarative funcional components with states.</p>
+<pre><code class="language-tsx"><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassicCounter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{    
+   <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">props: any</span>)</span> { <span class="hljs-built_in">super</span>(props); <span class="hljs-built_in">this</span>.state = { <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> }}
+   setCounter = <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">this</span>.setState({ <span class="hljs-attr">count</span>:<span class="hljs-built_in">this</span>.state.count + <span class="hljs-number">1</span> })
+   render = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>count: {this.state.count}<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{setCounter}</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+   <span class="hljs-tag">&lt;/&gt;</span></span>
+}
+</div></code></pre>
+<pre><code class="language-tsx"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">FunctionalCounter</span>(<span class="hljs-params">props: any</span>) </span>{
+   <span class="hljs-keyword">const</span> [count, setCount] = React.useState(<span class="hljs-number">0</span>)
+   <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>count: {count}<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{_</span> =&gt;</span> setCount(count + 1)}&gt;Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+   <span class="hljs-tag">&lt;/&gt;</span></span>)
+}
+</div></code></pre>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> FunctionalDeclarativeCounter = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>count: {store.count}<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{e</span> =&gt;</span> store.count++}&gt;Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h2 id="state-management">State Management</h2>
+<h3 id="local-state-handling">Local State Handling</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props, state</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, { state.hello }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  { setTimeout(() =&gt; state.hello=&quot;World&quot;, 100) }
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h3 id="global-state-management">Global state management</h3>
+<pre><code class="language-tsx"><div>ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>, store)
+</div></code></pre>
+<pre><code class="language-tsx"><div>declare <span class="hljs-keyword">const</span> store: Store
 
-<span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props, state</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, { state.hello }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{e</span> =&gt;</span> state.hello = e.target.value}
-          value={state.hello} /&gt;
+<span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, { store.hello }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 <span class="hljs-tag">&lt;/&gt;</span></span>
 
-<span class="hljs-keyword">import</span> { synchornizer } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+fetch(url).then(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.json()).then(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> store.hello = x)
+</div></code></pre>
+<h3 id="partial-state-distribution">Partial state distribution</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> useState({ <span class="hljs-attr">hello</span>: <span class="hljs-string">&quot;world&quot;</span> })
+</div></code></pre>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> share <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./share&#x27;</span>
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> synchornizer({
-   <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;http://sample/hello&quot;</span>,
-   <span class="hljs-attr">get</span>: <span class="hljs-function">(<span class="hljs-params">s: store</span>) =&gt;</span> s.hello,
-   <span class="hljs-attr">set</span>: <span class="hljs-function">(<span class="hljs-params">s: store, v: any</span>) =&gt;</span> s.hello = v
+<span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, { share.hello }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h2 id="event-management">Event Management</h2>
+<h3 id="multi-listening">Multi-listening</h3>
+<ul>
+<li>React Life-Cycle</li>
+<li>DOM listeners</li>
+<li>Routing changes</li>
+<li>Handled Exception (failure)</li>
+<li>Custom messaging</li>
+</ul>
+<h3 id="cancelable-events">Cancelable events</h3>
+<pre><code class="language-tsx"><div><span class="hljs-comment">// tagName || callback</span>
+listener.subscribers.filter(...).cancel()
+</div></code></pre>
+<h3 id="life-cycle-synonyms">Life-cycle synonyms</h3>
+<table>
+<thead>
+<tr>
+<th>synonym</th>
+<th>life-cycle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mounted</td>
+<td>componentDidMount</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>componentDidUpdated</td>
+</tr>
+<tr>
+<td>unmount</td>
+<td>componentWillUnmount</td>
+</tr>
+<tr>
+<td>catched</td>
+<td>componentDidCatch</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lite-globalization">Lite globalization</h2>
+<h3 id="definition">Definition</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { I18N } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+<span class="hljs-comment">// typed-driven locales</span>
+<span class="hljs-comment">// parameters with functions</span>
+interface Locale <span class="hljs-keyword">extends</span> I18N { 
+    <span class="hljs-attr">welcome</span>: string 
+    hello(who:string):string
+}   
+
+<span class="hljs-keyword">const</span> en: Locale = {
+   <span class="hljs-attr">language</span>: <span class="hljs-string">&quot;en&quot;</span>,
+   <span class="hljs-attr">identity</span>: <span class="hljs-string">&quot;English&quot;</span>,
+   <span class="hljs-attr">currency</span>: <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> <span class="hljs-string">`$ <span class="hljs-subst">${value.toFixed(<span class="hljs-number">2</span>)}</span>`</span>,
+   <span class="hljs-attr">datetime</span>: <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> value.toISOString(),
+   <span class="hljs-attr">welcome</span>: <span class="hljs-string">&quot;Welcome&quot;</span>,
+   <span class="hljs-attr">hello</span>: <span class="hljs-function">(<span class="hljs-params">who</span>) =&gt;</span> <span class="hljs-string">`Hello, <span class="hljs-subst">${who}</span>`</span>
+}
+
+<span class="hljs-keyword">const</span> pt: Locale = {
+   <span class="hljs-attr">language</span>: <span class="hljs-string">&quot;pt&quot;</span>,
+   <span class="hljs-attr">identity</span>: <span class="hljs-string">&quot;Português&quot;</span>,
+   <span class="hljs-attr">currency</span>: <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> <span class="hljs-string">`R$ <span class="hljs-subst">${value.toFixed(<span class="hljs-number">2</span>)}</span>`</span>,
+   <span class="hljs-attr">datetime</span>: <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> value.toISOString(),
+   <span class="hljs-attr">welcome</span>: <span class="hljs-string">&quot;Bem-vindo&quot;</span>,
+   <span class="hljs-attr">hello</span>: <span class="hljs-function">(<span class="hljs-params">who</span>) =&gt;</span> <span class="hljs-string">`Olá, <span class="hljs-subst">${who}</span>`</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> [en,pt]
+</div></code></pre>
+<h3 id="configuration">Configuration</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+<span class="hljs-keyword">import</span> locales <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./locales&#x27;</span>
+
+ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>)
+   .globalization(locales, <span class="hljs-literal">true</span>)  
+</div></code></pre>
+<h3 id="implementation">Implementation</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { useLanguage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+declare <span class="hljs-keyword">const</span> locale: any
+
+useLanguage(<span class="hljs-string">&quot;pt&quot;</span>)
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span> { locale.title } <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Hello, { locale.hello(&quot;John&quot;) }<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h2 id="api-synchronization">API Synchronization</h2>
+<h3 id="configuration-1">Configuration</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { synchronizer } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> synchronizer({
+   <span class="hljs-comment">// RESTful api</span>
+   <span class="hljs-attr">uid</span>: <span class="hljs-string">&quot;id&quot;</span>,
+   <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;http://localhost:3000/hello&quot;</span>,
+   <span class="hljs-attr">map</span>: <span class="hljs-function">(<span class="hljs-params">s: Store</span>) =&gt;</span> s.hello,
+    
+   <span class="hljs-comment">// flexible adaptation</span>
+   <span class="hljs-attr">update</span>: {
+      <span class="hljs-attr">route</span>: <span class="hljs-string">&quot;/update&quot;</span>,
+      <span class="hljs-attr">hasIdField</span>: <span class="hljs-literal">false</span>,
+   },
+    
+   <span class="hljs-comment">// advanced settings</span>
+   <span class="hljs-attr">timeout</span>: <span class="hljs-number">9000</span> 
+   <span class="hljs-attr">caching</span>: <span class="hljs-number">3000</span> 
+   <span class="hljs-attr">pooling</span>: <span class="hljs-number">1000</span> 
+   <span class="hljs-attr">retries</span>: <span class="hljs-number">3</span>    
 })
+</div></code></pre>
+<h3 id="authentication">Authentication</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> ReactDOM, { login, logon, logout }  <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+<span class="hljs-keyword">import</span> locales <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./locales&#x27;</span>
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> [pt, en]
+ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span>)
+        .globalization(locales, <span class="hljs-literal">true</span>) 
+        .authentication(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>)
+           .login(<span class="hljs-string">&quot;http://localhost:4000/login&quot;</span>)
+           .token(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.access_token)
+           .route(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;/unauthorized&quot;</span>)
+
+
+<span class="hljs-keyword">await</span> login(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-number">123</span>)
+<span class="hljs-keyword">const</span> user = logon()
+logout()
 
 </div></code></pre>
+<h3 id="implementation-1">Implementation</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { syncher } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+<span class="hljs-keyword">import</span> { helloApi } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./helloApi&#x27;</span>
 
-        
+<span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+   { helloApi.isLoading &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">progress</span> /&gt;</span> }
+
+   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, { store.hello }<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onLoad}</span>&gt;</span>Load<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onSave}</span>&gt;</span>Save<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">&quot;hello&quot;</span> /&gt;</span> 
+<span class="hljs-tag">&lt;/&gt;</span></span>
+
+</div></code></pre>
+<h2 id="routing-properties">Routing properties</h2>
+<h3 id="declaration">Declaration</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> App = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/hello&quot;</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+   <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/hello&quot;</span> /&gt;</span>    
+   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h3 id="parameters">Parameters</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> App = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/hello/John&quot;</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+   <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/hello/:name&quot;</span> /&gt;</span>    
+   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { Locale } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../locales&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Hello = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span> Hello, { getRoute(&quot;name&quot;) }<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h3 id="navigation">Navigation</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> { setRoute } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> App = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onRoute</span>=<span class="hljs-string">&quot;/hello/John&quot;</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setRoute(-1)}&gt;Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+   <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">route</span>=<span class="hljs-string">&quot;/hello/:name&quot;</span> /&gt;</span>    
+   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h2 id="directive-handling">Directive handling</h2>
+<h3 id="two-way-data-binding">Two-Way Data Binding</h3>
+<pre><code class="language-tsx"><div>declare <span class="hljs-keyword">const</span> store: any
+
+<span class="hljs-keyword">const</span> global2wayDataBinding = <span class="hljs-function">(<span class="hljs-params">props: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{store.who}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{e</span> =&gt;</span> store.who = e.target.value}/&gt;
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">{s</span> =&gt;</span> s.who} /&gt;
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">&quot;who&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+
+<span class="hljs-keyword">const</span> local2wayDataBinding = <span class="hljs-function">(<span class="hljs-params">props: any, state: any</span>) =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{state.who}</span> <span class="hljs-attr">onInput</span>=<span class="hljs-string">{e</span> =&gt;</span> state.who = e.target.value}/&gt;
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">local</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">{s</span> =&gt;</span> s.who} /&gt;
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">local</span> <span class="hljs-attr">bind</span>=<span class="hljs-string">&quot;who&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/&gt;</span></span>
+</div></code></pre>
+<h3 id="component-scoped-css">Component-Scoped CSS</h3>
+<pre><code class="language-css"><div><span class="hljs-comment">/* style.css */</span>
+<span class="hljs-selector-tag">h1</span> { <span class="hljs-attribute">color</span>: blue }
+<span class="hljs-selector-tag">h1</span><span class="hljs-selector-class">.Hello</span> { <span class="hljs-attribute">color</span>:red }
+</div></code></pre>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;./style.css&#x27;</span>
+<span class="hljs-keyword">const</span> App = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span> My blue title <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
+<span class="hljs-keyword">const</span> Hello = <span class="hljs-function">() =&gt;</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span> My red title <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
+</div></code></pre>
+<h3 id="custom-directive-programming">Custom Directive Programming</h3>
+<h3 id="implementation-2">Implementation</h3>
+<pre><code class="language-tsx"><div><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-away&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> clickedLabel(props: any, <span class="hljs-attr">args</span>: DirectiveArgs) =&gt; 
+   args.tag !== <span class="hljs-string">&quot;label&quot;</span> ?  props : ({ <span class="hljs-attr">onClick</span>:<span class="hljs-function">() =&gt;</span> alert(<span class="hljs-string">&#x27;clicked label...&#x27;</span>) })
+
+ReactDOM.createRoot(<span class="hljs-literal">true</span>, <span class="hljs-string">&quot;#root&quot;</span>, <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span>/&gt;</span></span>, context, [clickedLabel])
+</div></code></pre>
+<p>For new properties, TypeScript requires module declaration</p>
+<pre><code class="language-tsx"><div>declare <span class="hljs-built_in">module</span> <span class="hljs-string">&#x27;react&#x27;</span> {
+   <span class="hljs-keyword">export</span> interface HTMLAttributes&lt;T&gt; { 
+      <span class="hljs-attr">newAttribute</span>: boolean 
+   } 
+}
+</div></code></pre>
+<h3 id="explanation">Explanation</h3>
+<ul>
+<li><strong>what a directive could do?</strong> routing props, two-way data binding, component-scoped css, etc.</li>
+<li><strong>when use it instead of components?</strong> when you don't want new components for new behaviors</li>
+<li><strong>is like an Angular rattribute directive?</strong> it doesn't need a new property, could just change props</li>
+</ul>
+<h3 id="conception">Conception</h3>
+<ul>
+<li><strong>property injection</strong>: inject external properties inside elements and components</li>
+<li><strong>dependency injection</strong>: a component has props, a directive has components</li>
+<li><strong>component tree handling</strong>: it handle element in component tree in rendering time</li>
+</ul>
+
+        <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
         
     </body>
     </html>
