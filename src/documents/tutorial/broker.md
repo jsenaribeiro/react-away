@@ -88,20 +88,3 @@ listener.subscribers.filter(x => x.eventTag == "click").cancel()
 listener.subscribers.filter(x => x.callback == callback).cancel()
 ````
 
-
-````tsx
-import { listener } from 'react-away'
-
-const subscribers = listener.subscribers
-const callback = e => log("My event happens")
-
-listener.on("myevent", callback)
-listener.dispatch("myevent", "just a pub/sub testing...")
-
-// cancel all subscribers of DOM 'click' event
-subscribers.filter(x => x.eventTag == "myevent").cancel()
-
-// cancel a specific subscribed callback 
-subscribers.filter(x => x.callback == callback).cancel()
-
-````
