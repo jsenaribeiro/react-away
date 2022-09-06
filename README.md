@@ -11,8 +11,10 @@
 
 Installation, configuration and implementation.
 
-```cmd
-npm i react-away --save
+```shell
+> npm create vite@latest --template react-ts
+> npm i 
+> npm i react-away --save
 ```
 
 Configure replacing ReactDOM by ReactDOM.
@@ -279,7 +281,7 @@ const Hello = (props) => <>
    <button onClick={onLoad}>Load</button>
    <button onClick={onSave}>Save</button>
 
-   <input bind="hello" /> 
+   <input value={store.hello} onInput={e => store.hello = e.target.value}>
 </>
 
 ````
@@ -313,7 +315,7 @@ export const App = (props: any) => <>
 ````
 
 ````tsx
-import { Locale } from '../locales'
+import { getRoute } from 'react-away'
 
 export const Hello = (props: any) => <>
    <h2> Hello, { getRoute("name") }</h2>
@@ -343,16 +345,16 @@ export const App = (props: any) => <>
 ````tsx
 declare const store: any
 
-const global2wayDataBinding = (props: any) => <>
-    <input value={store.who} onInput={e => store.who = e.target.value}/>
-    <input bind={s => s.who} />
-    <input bind="who" />
+const oneWayDataBinding = (props: any) => <>
+    <input onInput={e=>store.who=e.target.value}
+           value={store.who} />
 </>
 
-const local2wayDataBinding = (props: any, state: any) => <>
-    <input value={state.who} onInput={e => state.who = e.target.value}/>
-    <input local bind={s => s.who} />
-    <input local bind="who" />
+const twoWayDataBinding = (props: any, state: any) => <>
+    <input local bind={s => s.who} />
+    <input local bind="who" />
+    <input bind={s => s.who} />
+    <input bind="who" />
 </>
 ````
 
