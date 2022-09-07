@@ -4,7 +4,7 @@
 
 <br/>
 
-> YouTube [React Away tutorial](https://www.youtube.com/watch?v=9ugQcP9clMQ)
+> YouTube [React Away Overview](https://www.youtube.com/watch?v=ngZNQfpTC10)
 
 
 ## Quick Start

@@ -84,6 +84,17 @@ const App = () => <>
    <h1> { locale.title } </h1>
    <h2>Hello, { locale.hello("Mundo") }</h2>
 </>
+
+const directive = (props: any, args: DirectiveArgs): any => props
 ```
 
-## 
+````html
+<h1 className='app-h1'>Title<h1>
+
+<a className={isRoute('/home') ? 'in-route' : ''}>Home</a>
+````
+````css
+.app-h1 {  color: steelblue; }
+.in-route { filter: inverse(1); }
+a.routed { filter: inverse(1); }
+````
