@@ -11,8 +11,7 @@ Installation, configuration and implementation.
 
 ```shell
 > npm create vite@latest --template react-ts
-> npm i 
-> npm i react-away --save
+> npm i &&  npm i react-away --save
 ```
 
 Configure replacing ReactDOM by ReactDOM.
