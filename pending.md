@@ -1,12 +1,22 @@
-cloner refac
-state arg initial
-class component
-presentation
-tutorial
-doc site (mark -> web)
-
-
-away
-	proxys: rendering state
-	synchers: restful abstraction
-	directives: property-injection
+category
+   declarative style
+      comparison
+      limitation
+      advantages
+   state management
+      static (i18n)
+         declaration
+         configuration
+         implementation
+      dynamic
+         local
+         global
+         partial
+      remote
+         usage
+         mapping
+         authentication
+   directive props
+      conception
+      library
+      custom

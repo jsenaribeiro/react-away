@@ -64,11 +64,7 @@ class ClassicCounter extends React.Component {    
       <button onClick={setCounter}>Add</button>
    </>
 }
-````
 
-The same component in a stateful functional component style.
-
-````tsx
 function FunctionalCounter(props: any) {
    const [count, setCount] = React.useState(0)
    return (<>
@@ -76,11 +72,7 @@ function FunctionalCounter(props: any) {
      <button onClick={_ => setCount(count + 1)}>Add</button>
    </>)
 }
-````
 
-And in the proposal fully declarative functional component style.
-
-````tsx
 const FunctionalDeclarativeCounter = (props: any) => <>
    <label>count: {store.count}</label>
    <button onClick={e => store.count++}>Add</button>
@@ -92,20 +84,8 @@ const FunctionalDeclarativeCounter = (props: any) => <>
 Declarative routing with props directives and history navigation.
 
 ````tsx
-export const App = (props: any) => <>
-   <button onRoute="/">Home</button>
-   <button onRoute="/hello">Hello</button>
-   <button onClick={() => setRoute(-1)}>Back</button>
+import { getRoute } from 'react-away'
 
-   <section>
-      <Hello route="/hello" />    
-   </section>
-</>
-````
-
-It also route parametrization with react-router-dom syntax.
-
-````tsx
 export const App = (props: any) => <>
    <button onRoute="/">Home</button>
    <button onRoute="/hello/John">Hello</button>
@@ -115,12 +95,8 @@ export const App = (props: any) => <>
       <Hello route="/hello/:name" />    
    </section>
 </>
-````
 
-````tsx
-import { getRoute } from 'react-away'
-
-export const Hello = (props: any) => <>
+const Hello = (props: any) => <>
    <h2> Hello, { getRoute("name") }</h2>
 </>
 ````
@@ -162,10 +138,10 @@ export default useState({ hello: "world" })
 ````
 
 ````tsx
-import share from './share'
+import shared from './shared'
 
 const Hello = (props) => <>
-  <h1>Hello, { share.hello }</h1>
+  <h1>Hello, { shared.hello }</h1>
 </>
 ````
 
@@ -188,11 +164,8 @@ listener.on("keydown", _ => console.log("DOM keydom event"))
 listener.on("failure", _ => console.log("any kind of error"))
 listener.on("/routed", _ => console.log("Entered in route"))
 listener.on("myEvent", e => console.log(e))
-````
 
-With cancelable feature by event tag or callback reference.
-
-````tsx
+//  canceling by event tag or callback reference.
 listener.subscribers.filter(...).cancel()
 ````
 
@@ -203,8 +176,6 @@ Object-oriented localization (instead JSON).
 ```tsx
 import { I18N } from 'react-away'
 
-// typed-driven locales
-// parameters with functions
 export default interface Locale extends I18N { 
     welcome: string 
     hello(who:string):string
@@ -216,22 +187,13 @@ I18n interfaces offers basic localization as currency format.
 ````tsx
 import Locale from './locale'
 
-const en: Locale = {
+export const en: Locale = {
    language: "en",
    identity: "English",
    currency: (value) => `$ ${value.toFixed(2)}`,
    datetime: (value) => value.toISOString(),
    welcome: "Welcome",
    hello: (who) => `Hello, ${who}`
-}
-
-const pt: Locale = {
-   language: "pt",
-   identity: "Português",
-   currency: (value) => `R$ ${value.toFixed(2)}`,
-   datetime: (value) => value.toISOString(),
-   welcome: "Bem-vindo",
-   hello: (who) => `Olá, ${who}`
 }
 ````
 
@@ -240,20 +202,22 @@ Locales are registered in createRoot.
 ````tsx
 import ReactDOM from 'react-away'
 import en from './locales/en'
+import es from './locales/es'
 import pt from './locales/pt'
 
 ReactDOM.createRoot(true, "#root", <App />)
-   .globalization([en, pt], true)  
+   .globalization([en, es, pt], true)  
 ````
 
 It uses browser language as default, or defined by useLanguage function.
 
 ````tsx
 import { useLanguage } from 'react-away'
+import Locale from './locale'
 
-declare const locale: any
+declare const locale: Locale
 
-useLanguage("pt")
+useLanguage("pt") // or browser language as default
 
 const App = () => <>
    <h1> { locale.title } </h1>
@@ -350,13 +314,12 @@ const twoWayDataBinding = (props: any, state: any) => <>
 Scoped CSS as component tag as CSS class name.
 
 ````css
-/* style.css */
 h1 { color: blue }
 h1.Hello { color:red }
 ````
 
 ````tsx
-import './style.css'
+import './sample.css'
 const App = () => <h1> My blue title </h1>
 const Hello = () => <h1> My red title </h1>
 ````

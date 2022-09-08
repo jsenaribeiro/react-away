@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: styler/styledRouter.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,67 +17,55 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: styler/styledRouter.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h2>Usage</h2>
-<p>With npm installed, type the command bellow with npm (or yarn).</p>
-<pre class="prettyprint source lang-console"><code>> npm i react-away --save
-> yarn add react-away
+        <article>
+            <pre class="prettyprint source linenums"><code>/**  @module Styling */
+import { appendCss } from './helper';
+import { router } from '../router';
+/**
+ * Directive for routing render
+ * @param {object} props current props
+ * @returns {object} encapsulated isRouted
+ */
+export function routeHandling(props) {
+    if (!props?.route)
+        return props;
+    // applies in JSX elements the route visibility 
+    if (!router.isRouted(props.route))
+        props.hidden = true;
+    return { ...props };
+}
+/**
+ * Directive for routing handler
+ * @param {object} props current props
+ * @returns {object} encapsulated setRoute
+ */
+export function onRouteHandling(props) {
+    if (!props?.onRoute)
+        return props;
+    let newProps = { ...props };
+    // applies onClick event for onRoute
+    newProps = { ...newProps, onClick: (e) => router.setRoute(newProps.onRoute) };
+    // applies active-route className when element 
+    // with onRoute property is in current route
+    let isRouted = router.isRouted(newProps.onRoute);
+    if (isRouted)
+        newProps = { ...newProps, ...appendCss(newProps, "routed") };
+    return {
+        ...props,
+        ...newProps
+    };
+}
 </code></pre>
-<p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre class="prettyprint source lang-tsx"><code>class Store { public hello:string = &quot;World&quot; }
-ReactDOM.createRoot(true, &quot;#root&quot;, &lt;App />, Store)
-</code></pre>
-<p>And that is: state management and two-way data binding within a full declarative component.</p>
-<pre class="prettyprint source lang-tsx"><code>export const HelloWorld = () => &lt;>
-   &lt;h1>Hello, {store.user.name} !&lt;/h1>
-   Name: &lt;input bind=&quot;user.name&quot;} /> 
-&lt;/>
-
-const Hello = (props, state) => &lt;>
-   &lt;h1>Hello, { state.hello }&lt;/h1>
-   &lt;input onInput={e => state.hello = e.target.value}
-          value={state.hello} />
-&lt;/>
-
-import { synchornizer } from 'react-away'
-
-export default synchornizer({
-   url: &quot;http://sample/hello&quot;,
-   get: (s: store) => s.hello,
-   set: (s: store, v: any) => s.hello = v
-})
-
-export default [pt, en]
-
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 

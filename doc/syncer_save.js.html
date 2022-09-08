@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: syncer/save.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: syncer/save.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module Synching */
+import { context, delay } from '../shared';
+import { loadAsync } from './load';
+import { aborter, handler } from './handler';
+const FAILED_FETCH_SYNC = "(React Away) Sync failed: not possible to fetch data...";
+const invalidMappedId = (key) => "(React Away) id field not correctly mapped (" + key + " field no found in entity)";
+const same = (x, y) => JSON.stringify(x) === JSON.stringify(y);
+const diff = (x, y) => same(x, y) === false;
+async function preValidationAsync(that, data, guid, retries = 3) {
+    const noReady = !that.synced;
+    const failed = !that.synced &amp;&amp; !retries;
+    const hasUID = (obj) => Object.keys(obj).includes(guid);
+    const retry = () => preValidationAsync(that, data, guid, retries - 1);
+    const noGUID = Array.isArray(data)
+        ? data?.every(hasUID) === false
+        : hasUID(data) === false;
+    if (failed)
+        throw FAILED_FETCH_SYNC;
+    if (noReady)
+        await delay(500, async () => await retry());
+    if (noGUID)
+        throw invalidMappedId(guid);
+}
+/**
+ * Change request inference for POST, PUT and DELETE verbs
+ * @param {Syncher} syncher Syncher instance
+ * @param {boolean} reload send a GET request after a change request?
+ */
+export async function saveAsync(syncher, reload) {
+    const that = syncher.api;
+    const guid = that.config.uid;
+    const info = context.storer(that.config.map);
+    const data = JSON.parse(JSON.stringify(info));
+    const unit = !Array.isArray(data);
+    await preValidationAsync(that, data, guid);
+    that.reload = reload;
+    that.actual = data;
+    if (unit &amp;&amp; !that.actual[guid])
+        action(syncher, "create", that.actual);
+    else if (unit &amp;&amp; that.actual[guid]) {
+        const exists = unit
+            ? JSON.stringify(that.synced) === JSON.stringify(that.actual)
+            : that.synced.some((x) => x[guid] === that.actual[guid]);
+        if (exists)
+            action(syncher, "update", that.actual);
+    }
+    if (!unit &amp;&amp; that.actual) {
+        const createds = [];
+        const deleteds = [];
+        const updateds = [];
+        that.actual.forEach((item) => {
+            const creating = that.synced
+                .every((x) => x[guid] !== item[guid]);
+            const updating = that.synced
+                .filter((x) => x[guid] === item[guid])
+                .some((x) => diff(x, item));
+            if (creating)
+                createds.push(item);
+            if (updating)
+                updateds.push(item);
+        });
+        that.synced.forEach((item) => {
+            const identity = (x) => x[guid] !== item[guid];
+            const deleting = item[guid] &amp;&amp; that.actual.every(identity);
+            if (deleting)
+                deleteds.push(item);
+        });
+        createds.forEach(x => action(syncher, "create", x));
+        updateds.forEach(x => action(syncher, "update", x));
+        deleteds.forEach(x => action(syncher, "delete", x));
+        console.debug({ createds, updateds, deleteds });
+        const noAction = createds.length
+            + updateds.length
+            + deleteds.length === 0;
+        if (noAction &amp;&amp; that.reload)
+            loadAsync(syncher, {});
+    }
+}
+/**
+ * Executes the change request for POST, PUT and DELETE verbs
+ * @param {Syncher} syncher Syncher instance
+ * @param {Action} action change request label (create, update, delete)
+ * @param {object} entity target entity object
+ */
+async function action(syncher, action, entity) {
+    const that = syncher.api;
+    const guid = entity[that.config.update?.uid || that.config.uid];
+    const method = action == "create" ? "POST"
+        : action == "update" ? "PUT"
+            : "DELETE";
+    const hasId = action === "create" ? false
+        : that.config[action] ? that.config[action].inIdURL
+            : that.config.inIdURL;
+    const headers = await that.headers();
+    const route = that.config[action]?.route || that.config.route;
+    const url = that.config.url + route + (hasId ? `/${guid}` : "").replace("//", "/");
+    const body = JSON.stringify(entity);
+    const settings = {
+        method, body, headers,
+        signal: aborter.signal
+    };
+    await handler(syncher, "SAVE", url, async () => {
+        const response = await fetch(url, settings);
+        if (response.ok)
+            await response.json();
+        else
+            throw { message: response.statusText };
+        that.synced = that.actual;
+        if (that.reload)
+            loadAsync(syncher, {});
+    });
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Authoring.html">Authoring</a></li><li><a href="module-Binding.html">Binding</a></li><li><a href="module-Routing.html">Routing</a></li><li><a href="module-Storing.html">Storing</a></li><li><a href="module-Styling.html">Styling</a></li><li><a href="module-Synching.html">Synching</a></li></ul><h3>Classes</h3><ul><li><a href="Exception.html">Exception</a></li><li><a href="I18nFluent.html">I18nFluent</a></li><li><a href="module.exports.html">exports</a></li><li><a href="module-Authoring.Authenticator.html">Authenticator</a></li><li><a href="module-Routing.Router.html">Router</a></li><li><a href="module-Storing.Provider.html">Provider</a></li><li><a href="module-Synching.ApiAsync.html">ApiAsync</a></li><li><a href="Validation.html">Validation</a></li></ul><h3>Global</h3><ul><li><a href="global.html#cloneComponent">cloneComponent</a></li><li><a href="global.html#token">token</a></li><li><a href="global.html#useLanguage">useLanguage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 08 2022 14:23:01 GMT-0300 (Brasilia Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

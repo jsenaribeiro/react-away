@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Class: Provider</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,67 +17,138 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
-
-    
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
+    <h1 class="page-title">Class: Provider</h1>
 
     
 
 
 
 
-    <section>
-        <article><h2>Usage</h2>
-<p>With npm installed, type the command bellow with npm (or yarn).</p>
-<pre class="prettyprint source lang-console"><code>> npm i react-away --save
-> yarn add react-away
-</code></pre>
-<p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre class="prettyprint source lang-tsx"><code>class Store { public hello:string = &quot;World&quot; }
-ReactDOM.createRoot(true, &quot;#root&quot;, &lt;App />, Store)
-</code></pre>
-<p>And that is: state management and two-way data binding within a full declarative component.</p>
-<pre class="prettyprint source lang-tsx"><code>export const HelloWorld = () => &lt;>
-   &lt;h1>Hello, {store.user.name} !&lt;/h1>
-   Name: &lt;input bind=&quot;user.name&quot;} /> 
-&lt;/>
+<section>
 
-const Hello = (props, state) => &lt;>
-   &lt;h1>Hello, { state.hello }&lt;/h1>
-   &lt;input onInput={e => state.hello = e.target.value}
-          value={state.hello} />
-&lt;/>
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-Storing.html">Storing</a>.</span>Provider<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>React Away provider class</p></div>
+        
+    
+</header>
 
-import { synchornizer } from 'react-away'
+<article>
+    <div class="container-overview">
+    
+        
 
-export default synchornizer({
-   url: &quot;http://sample/hello&quot;,
-   get: (s: store) => s.hello,
-   set: (s: store, v: any) => s.hello = v
-})
+    
+    <h2>Constructor</h2>
+    
 
-export default [pt, en]
+    
+    <h4 class="name" id="Provider"><span class="type-signature"></span>new Provider<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-</code></pre></article>
-    </section>
+    
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="storer_provider.js.html">storer/provider.js</a>, <a href="storer_provider.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

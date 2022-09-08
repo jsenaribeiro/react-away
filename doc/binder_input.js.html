@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: binder/input.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,67 +17,49 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: binder/input.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h2>Usage</h2>
-<p>With npm installed, type the command bellow with npm (or yarn).</p>
-<pre class="prettyprint source lang-console"><code>> npm i react-away --save
-> yarn add react-away
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module Binding */
+import { valuer } from "../storer/valuer";
+const isTwoWayDataBindingElement = (args) => ["input", "select", "textarea"].includes(args.tag);
+/**
+ * Directive for input two-way data binding
+ * @param {object} props current props
+ * @param {DirectiveArgs} args directive args
+ * @returns handles bind props for two-way data binding
+ */
+export function twoWayDataBindingControl(props, args) {
+    if (!props?.bind)
+        return props;
+    if (!isTwoWayDataBindingElement(args))
+        return props;
+    const field = props.bind;
+    const state = props.local ? window['state'][args.id] : window.store;
+    const value = valuer(state, field);
+    const event = (e) => valuer(state, field, e.target.value);
+    const model = { props, value, event };
+    return args.tag == "input" &amp;&amp; props.type == "radio" ? radio(model)
+        : args.tag == "input" &amp;&amp; props.type == "checkbox" ? checkbox(model)
+            : args.tag == "input" ? input(model)
+                : args.tag == "select" ? select(model)
+                    : args.tag == "textarea" ? textarea(model)
+                        : props;
+}
+const input = (h) => ({ ...h.props, value: h.value, onInput: h.event });
+const textarea = (h) => ({ ...h.props, value: h.value, onChange: h.event });
+const select = (h) => ({ ...h.props, value: h.value, onSelect: h.event });
+const radio = (h) => ({ ...h.props, checked: h.value, onChange: h.event });
+const checkbox = (h) => ({ ...h.props, checked: h.value, onInput: h.event });
 </code></pre>
-<p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre class="prettyprint source lang-tsx"><code>class Store { public hello:string = &quot;World&quot; }
-ReactDOM.createRoot(true, &quot;#root&quot;, &lt;App />, Store)
-</code></pre>
-<p>And that is: state management and two-way data binding within a full declarative component.</p>
-<pre class="prettyprint source lang-tsx"><code>export const HelloWorld = () => &lt;>
-   &lt;h1>Hello, {store.user.name} !&lt;/h1>
-   Name: &lt;input bind=&quot;user.name&quot;} /> 
-&lt;/>
-
-const Hello = (props, state) => &lt;>
-   &lt;h1>Hello, { state.hello }&lt;/h1>
-   &lt;input onInput={e => state.hello = e.target.value}
-          value={state.hello} />
-&lt;/>
-
-import { synchornizer } from 'react-away'
-
-export default synchornizer({
-   url: &quot;http://sample/hello&quot;,
-   get: (s: store) => s.hello,
-   set: (s: store, v: any) => s.hello = v
-})
-
-export default [pt, en]
-
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 

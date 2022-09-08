@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: router/router.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: router/router.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module Routing */
+import { context } from "../shared";
+import { listener } from "../storer";
+/**
+ * Router class
+ */
+export class Router {
+    listeners = {};
+    /**
+     * Change the current route
+     * @param {string} route the new route
+     * @param {object} state state to route
+     */
+    getRoute(parameter) {
+        const route = window.location.hash.slice(1);
+        const param = {};
+        const match = (x) => new RegExp(x.regex, "gi").test(route);
+        const tests = context.routes.filter(match);
+        const parse = (data) => {
+            const content = data.toLowerCase();
+            const numeric = /^\d+$/.test(content);
+            const logical = /true|false/.test(content);
+            const parsing = numeric || logical;
+            return parsing ? JSON.parse(content) : data;
+        };
+        if (!parameter)
+            return route;
+        if (!tests || !tests.length)
+            return route;
+        for (const found of tests) {
+            if (!found || !found.regex)
+                continue;
+            const regexp = new RegExp(found.regex, "gi");
+            const params = [...route.matchAll(regexp)];
+            if (!params)
+                continue;
+            for (let i = 0; i &lt; found.names.length; i++)
+                param[found.names[i].slice(1)] = parse(params[0][i + 1]);
+        }
+        return parameter === "*" ? param : param[parameter];
+    }
+    setRoute(route, state) {
+        const that = this;
+        const setRouteString = (route) => {
+            const listeners = router.listeners;
+            if (listeners[route]?.length > 0)
+                listeners[route].forEach(f => f());
+            window.location.hash = route;
+            listener.dispatch(route, state);
+            context.render();
+        };
+        const setRouteNumber = (index) => {
+            if (index > 0)
+                while (index-- > 0)
+                    window.history.go();
+            if (index &lt; 0)
+                while (index++ &lt; 0)
+                    window.history.back();
+            context.render();
+        };
+        typeof route == "string" ? setRouteString(route)
+            : typeof route == "number" ? setRouteNumber(route)
+                : context.render();
+    }
+    /**
+     * Check if the argument is routed
+     * @param {string} route route to check
+     */
+    isRouted(route) {
+        if (!route)
+            return false;
+        const current = window.location.hash.slice(1);
+        const routing = current.split('/');
+        const queried = route.split('/');
+        if (current === "/")
+            return route === current;
+        for (let i = 0; i &lt; queried.length; i++) {
+            if (routing[i] == undefined)
+                continue;
+            if (queried[i] == undefined)
+                continue;
+            if (routing[i].length == 0)
+                continue;
+            if (queried[i][0] === ":")
+                continue;
+            if (routing[i] !== queried[i])
+                return false;
+        }
+        return true;
+    }
+}
+export const router = new Router();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Authoring.html">Authoring</a></li><li><a href="module-Binding.html">Binding</a></li><li><a href="module-Routing.html">Routing</a></li><li><a href="module-Storing.html">Storing</a></li><li><a href="module-Styling.html">Styling</a></li><li><a href="module-Synching.html">Synching</a></li></ul><h3>Classes</h3><ul><li><a href="Exception.html">Exception</a></li><li><a href="I18nFluent.html">I18nFluent</a></li><li><a href="module.exports.html">exports</a></li><li><a href="module-Authoring.Authenticator.html">Authenticator</a></li><li><a href="module-Routing.Router.html">Router</a></li><li><a href="module-Storing.Provider.html">Provider</a></li><li><a href="module-Synching.ApiAsync.html">ApiAsync</a></li><li><a href="Validation.html">Validation</a></li></ul><h3>Global</h3><ul><li><a href="global.html#cloneComponent">cloneComponent</a></li><li><a href="global.html#token">token</a></li><li><a href="global.html#useLanguage">useLanguage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 08 2022 14:23:01 GMT-0300 (Brasilia Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: storer/i18n.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,67 +17,53 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: storer/i18n.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h2>Usage</h2>
-<p>With npm installed, type the command bellow with npm (or yarn).</p>
-<pre class="prettyprint source lang-console"><code>> npm i react-away --save
-> yarn add react-away
+        <article>
+            <pre class="prettyprint source linenums"><code>import { context } from "../shared";
+import AuthenticatorFluent from '../auther';
+var initialized = false;
+const LOCALES = [];
+/**
+ * Globalization fluent class
+ */
+export class I18nFluent {
+    globalization(locales, firstIsDefault = true) {
+        locales.forEach(l => LOCALES.push(l));
+        const hasDefault = locales &amp;&amp; locales.length > 1 &amp;&amp; firstIsDefault;
+        if (hasDefault)
+            context.locale = locales[0];
+        initialized = true;
+        setIdiom(navigator.language, 3);
+        return new AuthenticatorFluent();
+    }
+}
+/**
+ * Modular hook for change current i18n language
+ * @param {string} language required locale
+ * @returns {object} selected or default locale
+ */
+export function useLanguage(language) { return setIdiom(language, 3); }
+function setIdiom(language, retry) {
+    if (retry &lt; 0)
+        return;
+    if (initialized == false)
+        setTimeout(() => setIdiom(language, retry - 1), 99);
+    window.locale = LOCALES.find(x => x.language === language)
+        || LOCALES.find(x => x.language.startsWith(language))
+        || LOCALES.find(x => language.startsWith(x.language))
+        || context.locale;
+    context.render();
+}
 </code></pre>
-<p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre class="prettyprint source lang-tsx"><code>class Store { public hello:string = &quot;World&quot; }
-ReactDOM.createRoot(true, &quot;#root&quot;, &lt;App />, Store)
-</code></pre>
-<p>And that is: state management and two-way data binding within a full declarative component.</p>
-<pre class="prettyprint source lang-tsx"><code>export const HelloWorld = () => &lt;>
-   &lt;h1>Hello, {store.user.name} !&lt;/h1>
-   Name: &lt;input bind=&quot;user.name&quot;} /> 
-&lt;/>
-
-const Hello = (props, state) => &lt;>
-   &lt;h1>Hello, { state.hello }&lt;/h1>
-   &lt;input onInput={e => state.hello = e.target.value}
-          value={state.hello} />
-&lt;/>
-
-import { synchornizer } from 'react-away'
-
-export default synchornizer({
-   url: &quot;http://sample/hello&quot;,
-   get: (s: store) => s.hello,
-   set: (s: store, v: any) => s.hello = v
-})
-
-export default [pt, en]
-
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: storer/proxy.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,67 +17,70 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: storer/proxy.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h2>Usage</h2>
-<p>With npm installed, type the command bellow with npm (or yarn).</p>
-<pre class="prettyprint source lang-console"><code>> npm i react-away --save
-> yarn add react-away
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module Storing */
+Object.prototype.toObject = function () {
+    return JSON.parse(JSON.stringify(this));
+};
+import { context } from '../shared';
+export function createProxy(indexOrObject) {
+    return typeof indexOrObject === "number"
+        ? createProxyLocal(indexOrObject)
+        : createProxyGlobal(indexOrObject);
+}
+function createProxyLocal(index) {
+    if (!window['state'])
+        window['state'] = {};
+    if (!window['state'][index])
+        window['state'][index] = objectProxy({});
+    return window['state'][index];
+}
+function createProxyGlobal(store) {
+    return objectProxy(store);
+}
+function get(refer, field) {
+    return refer[field];
+}
+function set(refer, field, value) {
+    const isNew = !Object.keys(refer).includes(field);
+    const isArray = Array.isArray(value);
+    const isObject = typeof value === "object" &amp;&amp; !isArray;
+    setTimeout(() => context.render(), 1);
+    refer[field] = isArray ? arrayProxy(value)
+        : isNew &amp;&amp; isObject ? objectProxy(value)
+            : value;
+    context.asyncs
+        .filter(x => x.isRelated(refer))
+        .forEach(x => x.outOfSync = true);
+    return true;
+}
+function objectProxy(ref) {
+    const proxy = {};
+    for (const field in ref) {
+        if (Array.isArray(ref[field]))
+            proxy[field] = arrayProxy(ref[field]);
+        else if (typeof ref[field] == "object")
+            proxy[field] = objectProxy(ref[field]);
+        else
+            proxy[field] = ref[field];
+    }
+    return new Proxy(proxy, { set, get });
+}
+function arrayProxy(ref) {
+    const array = ref.map((x) => objectProxy(x));
+    return new Proxy(array, { set, get });
+}
 </code></pre>
-<p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre class="prettyprint source lang-tsx"><code>class Store { public hello:string = &quot;World&quot; }
-ReactDOM.createRoot(true, &quot;#root&quot;, &lt;App />, Store)
-</code></pre>
-<p>And that is: state management and two-way data binding within a full declarative component.</p>
-<pre class="prettyprint source lang-tsx"><code>export const HelloWorld = () => &lt;>
-   &lt;h1>Hello, {store.user.name} !&lt;/h1>
-   Name: &lt;input bind=&quot;user.name&quot;} /> 
-&lt;/>
-
-const Hello = (props, state) => &lt;>
-   &lt;h1>Hello, { state.hello }&lt;/h1>
-   &lt;input onInput={e => state.hello = e.target.value}
-          value={state.hello} />
-&lt;/>
-
-import { synchornizer } from 'react-away'
-
-export default synchornizer({
-   url: &quot;http://sample/hello&quot;,
-   get: (s: store) => s.hello,
-   set: (s: store, v: any) => s.hello = v
-})
-
-export default [pt, en]
-
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: syncer/load.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,67 +17,41 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: syncer/load.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h2>Usage</h2>
-<p>With npm installed, type the command bellow with npm (or yarn).</p>
-<pre class="prettyprint source lang-console"><code>> npm i react-away --save
-> yarn add react-away
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module Synching */
+import { aborter, handler } from './handler';
+import { context } from '../shared';
+/**
+ * Loading request by HTTP get verb
+ * @param {Syncher} syncher Syncher instance
+ * @param {object} filter query object for query string GET request
+ * @returns responde queried from RESTful API
+ */
+export async function loadAsync(syncher, filter) {
+    const that = syncher.api;
+    const headers = await that.headers();
+    const queries = filter &amp;&amp; "?" + new URLSearchParams(filter);
+    const settings = { headers, signal: aborter.signal };
+    const route = that.config.search?.route || that.config.route;
+    const url = that.config.url + route + queries;
+    return await handler(syncher, "LOAD", route + queries, async () => {
+        const response = await fetch(url, settings);
+        const result = await response.json();
+        context.storer(that.config.map, result);
+        return result;
+    });
+}
 </code></pre>
-<p>Replace ReactDOM pelo ReactDOM as bellow.</p>
-<pre class="prettyprint source lang-tsx"><code>class Store { public hello:string = &quot;World&quot; }
-ReactDOM.createRoot(true, &quot;#root&quot;, &lt;App />, Store)
-</code></pre>
-<p>And that is: state management and two-way data binding within a full declarative component.</p>
-<pre class="prettyprint source lang-tsx"><code>export const HelloWorld = () => &lt;>
-   &lt;h1>Hello, {store.user.name} !&lt;/h1>
-   Name: &lt;input bind=&quot;user.name&quot;} /> 
-&lt;/>
-
-const Hello = (props, state) => &lt;>
-   &lt;h1>Hello, { state.hello }&lt;/h1>
-   &lt;input onInput={e => state.hello = e.target.value}
-          value={state.hello} />
-&lt;/>
-
-import { synchornizer } from 'react-away'
-
-export default synchornizer({
-   url: &quot;http://sample/hello&quot;,
-   get: (s: store) => s.hello,
-   set: (s: store, v: any) => s.hello = v
-})
-
-export default [pt, en]
-
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 
