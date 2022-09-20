@@ -1,10 +1,11 @@
 /** @module Storing */
 
+import { Global } from "../global"
 import { context } from "../shared"
 
-type record = Record<string|symbol,any>
+declare const global: Global
 
-declare const window: any
+type record = Record<string|symbol,any>
 
 const ERROR_ROOT_OBJECT = new Error("letStore only selects sub-objects")
 const ERROR_VALUE_SELECTED = new Error("letStore only selects objects, not values")
@@ -18,11 +19,11 @@ export function useStore<T=any, U=any>(select: (store: T) => U) {
    if (parts.length < 2) throw ERROR_ROOT_OBJECT
 
    const field: string = parts[parts.length-1]
-   window[field] = {}
+   global[field] = {}
 
    Object.defineProperty(window, field, {
       get: function() { 
-         const selected = select(window.store) 
+         const selected = select(global.store) 
          const isNotAnObject = typeof selected != "object"
          if (isNotAnObject) throw ERROR_VALUE_SELECTED
          return selected

@@ -1,7 +1,10 @@
 /** @module Routing */
 
+import { Global } from "../global";
 import { context } from "../shared"
 import { listener } from "../storer"
+
+declare const global: Global
 
 export interface RouteQuery {
    regex: string;
@@ -32,7 +35,7 @@ export class Router {
     * @param {object} state state to route
     */   
    public getRoute<T=any>(parameter?: string): T {  
-      const route = window.location.hash.slice(1)
+      const route = global.route
       const param: Record<string, any> = { }
       const match = (x: any) => new RegExp(x.regex, "gi").test(route)
       const tests = context.routes.filter(match) 
@@ -86,7 +89,7 @@ export class Router {
          if (listeners[route]?.length > 0) 
             listeners[route].forEach(f => f())
          
-         window.location.hash = route
+         global.route = route
 
          listener.dispatch(route, state)
          
@@ -94,8 +97,8 @@ export class Router {
       }
    
       const setRouteNumber = (index: number) => {
-         if (index > 0) while(index-- > 0) window.history.go()
-         if (index < 0) while(index++ < 0) window.history.back()
+         if (index > 0) while(index-- > 0) global.next()
+         if (index < 0) while(index++ < 0) global.back()
          context.render()
       }
 
@@ -111,7 +114,7 @@ export class Router {
    public isRouted(route: string): boolean {
       if (!route) return false
 
-      const current = window.location.hash.slice(1)
+      const current = global.route
       const routing = current.split('/')
       const queried = route.split('/')
 

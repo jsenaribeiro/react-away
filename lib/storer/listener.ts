@@ -1,7 +1,10 @@
+import { Global } from "../global"
 import { context } from "../shared"
 import { IListener } from './listener.d'
 import { Subscriber } from './subscriber'
 import { Action } from "./types"
+
+declare const global: Global
 
 class Listener implements IListener {
    public labels = ["mounted", "updated", "unmount", "catched", "refresh"]
@@ -16,8 +19,8 @@ class Listener implements IListener {
    
    public register(add: boolean) {
       const listening = add 
-         ? window.addEventListener 
-         : window.removeEventListener
+         ? global.appendEvent 
+         : global.removeEvent
 
       const registration = (lbl: string, fns: Action[]) => 
          fns.forEach(f => listening(lbl, f))
@@ -31,9 +34,7 @@ class Listener implements IListener {
          .filter(k => !this.labels.includes(k))
          .forEach(k => registration(k, this.events[k]))
 
-      if (add) window.addEventListener("hashchange", x => context.render())
-      else window.removeEventListener("hashchange", x => context.render())
-      return window.onbeforeunload = (e) => console.log("onbeforeunload")
+      listening("hashchange", x => context.render())
    }
 
    public dispatch(evt: string, arg: any = {}) {

@@ -4,7 +4,7 @@ import { createProxy } from "../storer/proxy"
 import { ChildArgs } from "./types"
 import { context } from "."
 
-declare const window: any
+declare const global: any
 
 export default function cloneClass(args: ChildArgs) {
    return args.child

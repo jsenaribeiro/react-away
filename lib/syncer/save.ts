@@ -13,7 +13,7 @@ const invalidMappedId = (key: string) => "(React Away) id field not correctly ma
 const same = (x: any, y: any) => JSON.stringify(x) === JSON.stringify(y)
 const diff = (x: any, y: any) => same(x,y) === false
 
-declare const window: any
+declare const global: any
 
 async function preValidationAsync(that: ApiAsync, data: any, guid: string, retries = 3) {
    const noReady = !that.synced

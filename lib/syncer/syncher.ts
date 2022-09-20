@@ -1,10 +1,11 @@
+import { Global } from '../global'
 import { context } from '../shared'
 import { Exception } from '../types/error'
 import { ApiAsync } from './class'
 import { loadAsync } from './load'
 import { saveAsync } from './save'
 
-declare const window: any
+declare const global: Global
 
 export interface ISyncher<T=any> {
    exception: Exception 
@@ -42,7 +43,7 @@ export default class Syncher<T=any> implements ISyncher {
    public saveAsync = async (reload: boolean): Promise<void> => await saveAsync(this, reload)
 
    public isRelated(refer: any): boolean {
-      const mapped = this.api.config.map(window.store)
+      const mapped = this.api.config.map(global.store)
       
       return Array.isArray(mapped)
          ? mapped.some(x => x === refer)

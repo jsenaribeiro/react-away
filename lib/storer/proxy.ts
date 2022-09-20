@@ -8,7 +8,7 @@ declare global {
    }
 }
 
-declare const window: record
+declare const global: record
 
 Object.prototype.toObject = function() {
    return JSON.parse(JSON.stringify(this))

@@ -9,7 +9,7 @@ import Syncher from './syncher'
 
 var that = {} as any
 
-declare const windows: any
+declare const global: any
 
 /**
  * Synchronizer configurator class

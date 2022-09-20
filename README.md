@@ -35,4 +35,29 @@ export const HelloWorld = () => <>
    <h1>Hello, {store.user.name} !</h1>
    Name: <input bind="user.name"} /> 
 </>
-```
+
+````
+
+````tsx
+import { useState, useEffect } from 'react'
+
+function SemiDeclarativeCounter(props: any) {
+   const [count, setCount] = React.useState(0)
+
+   useEffect(() => setTimeout(() => setCount(count+1),1000 ))
+
+   return (<>
+     <label>count: {count}</label>
+     <button onClick={_ => setCount(count + 1)}>Add</button>
+   </>)
+}
+
+const FullyDeclarativeCounter = (props: any, state: any) => <>
+   { setTimeout(() => state.count++, 1000) }
+   <label>count: {store.count ?? store.count = 0}</label>
+   <button onClick={e => store.count++}>Add</button>
+</>
+
+
+````
+

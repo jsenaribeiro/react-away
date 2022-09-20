@@ -1,7 +1,7 @@
 import React from "react"
 import { inRouted } from '../router/routed'
 import { focus } from '../storer/focus'
-import { render } from "../root"
+import { render } from "../dom"
 import { ChildArgs, ChildrenArgs, Directive, TagType } from './types'
 import { context } from "."
 
@@ -10,7 +10,7 @@ import cloneElement from './element'
 import cloneFragment from './fragment'
 import cloneClass from './class'
 
-declare const window: any
+declare const global: any
 
 const letChildren = (tag: string, child: any) => {
    return ({tag, children: child.props.children, component: child})

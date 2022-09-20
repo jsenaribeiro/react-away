@@ -6,8 +6,9 @@ import { createProxy } from './proxy'
 import { context } from "../shared"
 import { listener } from './listener'
 import { router } from "../router"
+import { Global } from "../global"
 
-declare const window: any
+declare const global: Global
 
 /**
  * Store provider props
@@ -26,7 +27,7 @@ export class Provider extends React.Component<ProviderProps> {
       
       const refresh = () => this.setState({tick:new Date().getTime()})
       
-      window.store = createProxy(props.src)
+      global.store = createProxy(props.src)
 
       context.render = (timeout: number = 1) => 
          ! context.enable ? undefined

@@ -1,6 +1,9 @@
 /** @module Routing */
 
+import { Global } from "../global"
 import { context } from "../shared"
+
+declare const global: Global
 
 /**
  * Evaluate if the element is routed if there is a route props
@@ -11,7 +14,7 @@ export function inRouted(child: JSX.Element): boolean {
    if (!child?.props?.route) return true
 
    const elementRoute = child.props.route as string
-   const currentRoute = window.location.hash.slice(1)
+   const currentRoute = global.route
    const patternRoute = elementRoute
       .replace(/\/:.+?\//gi, "/(.+)/")
       .replace(/\/:.+?$/gi, "/(.+)")

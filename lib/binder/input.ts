@@ -3,7 +3,7 @@
 import { DirectiveArgs } from "../cloner"
 import { valuer } from "../storer/valuer"
 
-declare const window: any
+declare const global: any
 
 const isTwoWayDataBindingElement = (args: DirectiveArgs) => 
    ["input", "select", "textarea"].includes(args.tag)
@@ -25,7 +25,7 @@ export function twoWayDataBindingControl(props: any, args: DirectiveArgs) {
    if (!isTwoWayDataBindingElement(args)) return props
 
    const field = props.bind
-   const state = props.local ? window['state'][args.id] : window.store
+   const state = props.local ? global.state[args.id] : global.store
    const value = valuer(state, field)
    const event = (e:any) => valuer(state, field, e.target.value)
    const model = { props, value, event }

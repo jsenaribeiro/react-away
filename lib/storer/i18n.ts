@@ -1,7 +1,8 @@
 import { context } from "../shared"
 import AuthenticatorFluent from '../auther'
+import { Global } from "../global"
 
-declare const window: any
+declare const global: Global
 
 var initialized = false
 
@@ -39,7 +40,7 @@ function setIdiom<T extends I18N>(language: string, retry: number) {
    if (retry < 0) return
    if (initialized == false) setTimeout(() => setIdiom(language, retry-1), 99)
 
-   window.locale = LOCALES.find(x => x.language === language) as T
+   global.locale = LOCALES.find(x => x.language === language) as T
       || LOCALES.find(x => x.language.startsWith(language)) as T
       || LOCALES.find(x => language.startsWith(x.language)) as T
       || context.locale as T

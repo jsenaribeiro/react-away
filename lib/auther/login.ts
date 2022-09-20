@@ -8,6 +8,8 @@ import { Login } from './types'
 const INVALID = "invalid" 
 const UNAUTHORIZED = "unauthorized"
 
+declare const global: any
+
 /**
  * Get the current decoded token
  * @returns decoded token
@@ -100,7 +102,7 @@ export function parseJWT(token?: string | null): Login & JWT {
 
    const address = token.split('.')[1]
    const base64 = address.replace(/-/g, '+').replace(/_/g, '/')
-   const array = window.atob(base64).split('')
+   const array = global.atob(base64).split('')
    const payload = decodeURIComponent(array.map(parseJwtArray).join(''))
 
    return JSON.parse(payload)
