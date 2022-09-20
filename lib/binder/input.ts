@@ -34,6 +34,7 @@ export function twoWayDataBindingControl(props: any, args: DirectiveArgs) {
       : args.tag == "input" && props.type == "checkbox" ? checkbox(model)
       : args.tag == "input" ? input(model)
       : args.tag == "select" ? select(model)
+      : args.tag == "button" ? button(model)
       : args.tag == "textarea" ? textarea(model)
       : props
 }
@@ -43,3 +44,4 @@ const textarea = (h: Handle) => ({...h.props, value: h.value, onChange: h.event 
 const select = (h: Handle) => ({...h.props, value: h.value, onSelect: h.event })
 const radio = (h: Handle) => ({...h.props, checked: h.value, onChange: h.event })
 const checkbox = (h: Handle) => ({ ...h.props, checked: h.value, onInput: h.event })
+const button = (h: Handle) => ({ ...h.props, checked: h.value, onClick: h.event })

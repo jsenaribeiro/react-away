@@ -7,11 +7,13 @@ import AuthenticatorRoute from "./route"
  */
 export default class AuthenticatorToken  {
    private url = ""
+   private app: JSX.Element
    private encript = false
    private relogin = false
    private method: "GET"|"POST" = "POST"
    
    constructor(
+      app: JSX.Element,
       url: string, 
       method: "GET"|"POST", 
       encript: boolean,
@@ -20,6 +22,7 @@ export default class AuthenticatorToken  {
          this.encript = encript
          this.relogin = relogin
          this.url = url
+         this.app = app
    }   
 
    /**
@@ -29,6 +32,7 @@ export default class AuthenticatorToken  {
     */
    public token(getToken: (data: any) => any): AuthenticatorRoute {
        return new AuthenticatorRoute(
+         this.app, 
          this.url, 
          this.method, 
          this.encript, 

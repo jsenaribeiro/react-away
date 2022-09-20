@@ -1,16 +1,16 @@
 import React from "react"
-import { Store } from "../../Store"
+import Store from "../../Store"
 import { Locale } from "../../locales"
 import "./hello.css"
 
+declare const i18n: Locale
 declare const store: Store
-declare const locale: Locale
 
 interface State { hello?: string }
 
 export const Hello = (props: any, state: State) => <>
    <fieldset className="anyway">
-      <legend css="primary"> { locale.stateManagement } </legend>
+      <legend css="primary"> { i18n.stateManagement } </legend>
 
       <section>
          <aside>

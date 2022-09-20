@@ -16,21 +16,31 @@ class Listener implements IListener {
       this.events[evt].push(fnc)
       this.bounds.push(new Subscriber(evt, fnc))
    }
+
+   private append(event: string, action: (e:any) => void) {
+      if (global.isWeb === false) return
+      else eval('window').addEventListener(event, action)
+   }
+
+   private remove(event: string, action: (e:any) => void) {
+      if (global.isWeb === false) return
+      else eval('window').removeEventListener(event, action)
+   }
+
+   private isDOMEvent(event: string) {
+      if (global.isWeb === false || !eval('document.body')) return false
+      else return typeof eval('document.body')["on" + event] !== undefined
+   }
    
    public register(add: boolean) {
-      const listening = add 
-         ? global.appendEvent 
-         : global.removeEvent
+      const listening = add ? this.append : this.remove
 
       const registration = (lbl: string, fns: Action[]) => 
          fns.forEach(f => listening(lbl, f))
 
-      const isDOMevent = (event: string) =>
-         typeof (document.body as any)["on" + event] !== undefined
-
       Object.keys(this.events)
-         .filter(k => isDOMevent(k))
          .filter(k => !k.startsWith("/"))
+         .filter(k => this.isDOMEvent(k))
          .filter(k => !this.labels.includes(k))
          .forEach(k => registration(k, this.events[k]))
 

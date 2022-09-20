@@ -1,5 +1,7 @@
 /** @module Authoring */
 
+import { decode, encode } from 'base-64'
+
 import { router } from '../router'
 import { context } from '../shared'
 import { listener } from '../storer'
@@ -46,7 +48,7 @@ export async function login(username?: string, password?: string, timeout = 1000
    const credential = none
       ? sessionStorage.getItem("login") || ""
       : context.config.encript 
-      ? btoa(`${username}:${password}`)
+      ? encode(`${username}:${password}`)
       : JSON.stringify({ username, password })
 
    if (!credential) throw new Error("login: no credential")
@@ -102,7 +104,7 @@ export function parseJWT(token?: string | null): Login & JWT {
 
    const address = token.split('.')[1]
    const base64 = address.replace(/-/g, '+').replace(/_/g, '/')
-   const array = global.atob(base64).split('')
+   const array = decode(base64).split('')
    const payload = decodeURIComponent(array.map(parseJwtArray).join(''))
 
    return JSON.parse(payload)

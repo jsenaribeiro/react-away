@@ -3,10 +3,13 @@
 import { context } from "../shared"
 import AuthenticatorConfig from "./config"
 
+interface BuildApp { build: () => JSX.Element }
+
 /**
  * Authenticator fluent class
  */
 export default class AuthenticatorRoute {
+   private app: JSX.Element
    private url = ""
    private encript = false
    private relogin = false
@@ -14,6 +17,7 @@ export default class AuthenticatorRoute {
    private getToken: (data: any) => any = (x => x)
    
    constructor(
+      app: JSX.Element,
       url: string, 
       method: "GET"|"POST",
       encript: boolean,
@@ -24,10 +28,11 @@ export default class AuthenticatorRoute {
          this.relogin = relogin
          this.method = method
          this.url = url
+         this.app = app
    }   
 
-   public route(successRoute: string, failureRoute: string, timeout:number = 1000): AuthenticatorConfig {
-      return context.config = {
+   public route(successRoute: string, failureRoute: string, timeout:number = 1000): BuildApp  {
+      context.config = {
          address: this.url,
          encript: this.encript,
          getToken: this.getToken,
@@ -38,5 +43,7 @@ export default class AuthenticatorRoute {
             success: successRoute
          }
       }
+
+      return { build: () => this.app }
    }
 }

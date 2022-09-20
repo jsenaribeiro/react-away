@@ -47,9 +47,7 @@ function cloneClassFail(args: ChildArgs) {
       
       const info = new newChild.type(newProps, {})
 
-      console.log(child.props, info.props, newChild.props)
-
-      
+      console.log(child.props, info.props, newChild.props)      
 
       return info
    }

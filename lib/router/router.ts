@@ -1,8 +1,10 @@
 /** @module Routing */
 
-import { Global } from "../global";
+import { Global } from "../global"
 import { context } from "../shared"
-import { listener } from "../storer"
+import getRoute from "./getter"
+import isRouted from "./routed"
+import setRoute from "./setter"
 
 declare const global: Global
 
@@ -14,9 +16,14 @@ export interface RouteQuery {
 /**
  * Router class
  */
-export class Router {   
-   public listeners: Record<string, Function[]> = {} 
-   
+export class Router {      
+   public cursor: number = 0
+   public routes: string[] = []
+   public get routed() { 
+      console.log(this.routes, this.cursor)
+      return this.routes[this.cursor] 
+   }
+
    /**
     * Get the current route
     */
@@ -29,106 +36,50 @@ export class Router {
     */
    public getRoute<T=any>(parameter: string):T;
 
+   public getRoute<T=any>(parameter?: string): T { return getRoute<T>(parameter) }
+  
    /**
     * Change the current route
     * @param {string} route the new route
-    * @param {object} state state to route
-    */   
-   public getRoute<T=any>(parameter?: string): T {  
-      const route = global.route
-      const param: Record<string, any> = { }
-      const match = (x: any) => new RegExp(x.regex, "gi").test(route)
-      const tests = context.routes.filter(match) 
-      const parse = (data: string): any => {
-         const content = data.toLowerCase()
-         const numeric = /^\d+$/.test(content)
-         const logical = /true|false/.test(content)
-         const parsing = numeric || logical
-
-         return parsing ? JSON.parse(content) : data
-      }
-
-      if (!parameter) return route as any as T
-
-      if (!tests || !tests.length) return route as any as T
-
-      for (const found of tests) {
-         if (!found || !found.regex) continue
-
-         const regexp = new RegExp(found.regex, "gi")
-         const params = [...route.matchAll(regexp)]
-   
-         if (!params) continue
-         
-         for (let i=0; i < found.names.length; i++)
-            param[found.names[i].slice(1)] = parse(params[0][i+1])
-      }
-
-      return parameter === "*" ? param : param[parameter]
-   }
+    */
+   public setRoute(route: string): void;
 
    /**
     * Change the current route
     * @param {string} route the new route
     * @param {object} state state to route
     */
-   public setRoute(route: string, state?: any): void;
-
-   /**
-    * History route navigation
-    * @param {number} steps number of navigation steps
-    */
-   public setRoute(steps: number): void;
-
-   public setRoute(route: string | number | undefined, state?: any): void {
-      const that = this
-
-      const setRouteString = (route: string) => {
-         const listeners = router.listeners
-
-         if (listeners[route]?.length > 0) 
-            listeners[route].forEach(f => f())
-         
-         global.route = route
-
-         listener.dispatch(route, state)
-         
-         context.render()
-      }
+   public setRoute(route: string, state: any): void;
    
-      const setRouteNumber = (index: number) => {
-         if (index > 0) while(index-- > 0) global.next()
-         if (index < 0) while(index++ < 0) global.back()
-         context.render()
-      }
-
-      typeof route == "string" ? setRouteString(route)
-         : typeof route == "number" ? setRouteNumber(route)
-         : context.render()
+   public setRoute(route: string, state?: any): void { 
+      return setRoute(this, route, state) 
    }
 
    /**
     * Check if the argument is routed
     * @param {string} route route to check
     */
-   public isRouted(route: string): boolean {
-      if (!route) return false
+   public isRouted(route: string): boolean { return isRouted(route) }
 
-      const current = global.route
-      const routing = current.split('/')
-      const queried = route.split('/')
+   private move(type: "back"|"go") {
+      eval(`history.${type}()`)
+      global.route = eval('localtion.hash').slice(1)
+   }
 
-      if (current === "/") return route === current
+   public back() {
+      if (router.cursor <= 0) return
+      else router.cursor = router.cursor - 1
+      try { router.move("back") } 
+      catch { global.route = router.routed }
+      finally { context.render() }
+   }
 
-      for (let i=0; i<queried.length; i++) {
-         if (routing[i] == undefined) continue
-         if (queried[i] == undefined) continue
-         if (routing[i].length == 0) continue
-         if (queried[i][0] === ":") continue
-         if (routing[i] !== queried[i]) return false
-      }
-
-      return true
+   public next() {
+      if (router.cursor >= router.routes.length-1) return
+      else router.cursor = router.cursor + 1      
+      try { router.move("go") } 
+      catch { global.route = router.routed }
+      finally { context.render() }
    }
 }
 

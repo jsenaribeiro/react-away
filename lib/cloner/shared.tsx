@@ -1,7 +1,7 @@
 import React from "react"
-import { inRouted } from '../router/routed'
+import { letRoute } from '../router/letter'
 import { focus } from '../storer/focus'
-import { render } from "../dom"
+import { render } from "../registry"
 import { ChildArgs, ChildrenArgs, Directive, TagType } from './types'
 import { context } from "."
 
@@ -29,7 +29,7 @@ export const cloneChildren = ({tag, children, component}: ChildrenArgs) =>
      React.Children.map(children, child => cloneChild({tag, child, component}))
 
 export const cloneChild = (args: ChildArgs): any =>
-   ! inRouted(args.child) ? undefined
+   ! letRoute(args.child) ? undefined
    : React.isValidElement<any>(args.child) 
    ? clone(args)
    : args.child

@@ -1,4 +1,6 @@
-import { getRoute } from "../../../lib"
+import { router } from "../../../lib"
+
+const { getRoute } = router
 
 export const Params = (props: any) => <>
    <h2>Params /:id</h2>

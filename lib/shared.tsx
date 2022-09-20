@@ -5,19 +5,18 @@ export type Expression<T=any, U=any> = (f: Lambda<T, U>) => U
 import AuthenticatorConfig from './auther/config'
 import { valuer } from './storer/valuer'
 import { I18N } from './storer'
-import { router } from './router'
 import { Syncher } from './syncer'
 
 declare const global: any
 
 export const context = {
    enable: true,
-   asyncs: [] as Syncher[] ,
+   locale: {} as I18N,
+   asyncs: [] as Syncher[],
+   config: {} as AuthenticatorConfig,
    render: (timeout: number = 1) => { console.log("no render!") },
    storer: (field: any, value?: any) => valuer(global.store, field, value),
-   config: {} as AuthenticatorConfig,
-   routes: [] as any[],
-   locale: {} as I18N
+   routes: [] as { label:string, regex:string, param:string[] }[]
 }
 
 export const delay = async (timeout: number, action?: () => Promise<any>) => 
@@ -27,3 +26,4 @@ export const delay = async (timeout: number, action?: () => Promise<any>) =>
       setTimeout(done, timeout)
    }
 )
+
